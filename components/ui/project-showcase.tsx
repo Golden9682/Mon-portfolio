@@ -95,92 +95,157 @@ export function ProjectShowcase({
       onMouseMove={handleMouseMove}
       className="relative w-full mx-auto"
     >
-      {/* Floating Smartphone Mockup on Hover (Desktop) */}
+      {/* Floating Mockup on Hover (Desktop Screen) */}
       <div
         className="pointer-events-none fixed z-50 hidden lg:block overflow-hidden transition-all duration-300"
         style={{
           left: containerRef.current?.getBoundingClientRect().left ?? 0,
           top: containerRef.current?.getBoundingClientRect().top ?? 0,
-          transform: `translate3d(${smoothPosition.x + 30}px, ${smoothPosition.y - 200}px, 0)`,
+          transform: `translate3d(${smoothPosition.x + 30}px, ${
+            hoveredIndex !== null && projects[hoveredIndex]?.originalProject?.previewLayout === "desktop"
+              ? smoothPosition.y - 170
+              : smoothPosition.y - 230
+          }px, 0)`,
           opacity: isVisible ? 1 : 0,
-          scale: isVisible ? 1 : 0.8,
-          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), scale 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+          scale: isVisible ? 1 : 0.85,
+          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), scale 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s ease-out",
         }}
       >
-        {/* Realistic Smartphone Phone Frame */}
-        <div className="relative w-[240px] h-[460px] bg-[#0c111d] rounded-[42px] p-2.5 border-[5px] border-slate-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_30px_rgba(99,102,241,0.25)] ring-1 ring-white/20">
-          
-          {/* Inner Phone Bezel & Screen */}
-          <div className="relative w-full h-full bg-[#090d16] rounded-[34px] overflow-hidden flex flex-col justify-between border border-white/10">
-            
-            {/* Top Status Bar with Dynamic Island */}
-            <div className="relative z-20 pt-2 px-5 flex items-center justify-between text-[10px] text-white/80 font-medium">
-              <span>9:41</span>
+        {hoveredIndex !== null && projects[hoveredIndex]?.originalProject?.previewLayout === "desktop" ? (
+          /* Wide Desktop Browser Mockup (16:9 / 16:10) */
+          <div className="relative w-[540px] h-[330px] bg-[#0c111d] rounded-2xl p-2.5 border border-slate-700/80 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.9),0_0_35px_rgba(99,102,241,0.3)] ring-1 ring-white/20 transition-all duration-300">
+            <div className="relative w-full h-full bg-[#090d16] rounded-xl overflow-hidden flex flex-col border border-white/10 shadow-inner">
               
-              {/* Dynamic Island Pill */}
-              <div className="w-16 h-4 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 border border-white/10 shadow-inner">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/60" />
+              {/* macOS Browser Header */}
+              <div className="relative z-20 h-8 bg-slate-900/90 border-b border-white/10 px-3.5 flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                </div>
+
+                {/* Simulated URL bar */}
+                <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-black/40 border border-white/10 text-[10px] text-slate-300 font-mono max-w-[280px] truncate">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span className="text-slate-400">https://</span>
+                  <span className="text-indigo-300 font-semibold">
+                    {projects[hoveredIndex].id === "food-et-cie"
+                      ? "food-et-cie.netlify.app"
+                      : projects[hoveredIndex].id === "assistant-dg"
+                      ? "assistant-dg.enterprise/workflow"
+                      : "bot-pipeline.ai/telegram-engine"}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1 text-[10px] text-slate-500 font-mono">
+                  <span>1080p HD</span>
+                </div>
               </div>
 
-              <div className="flex items-center gap-1.5">
-                <Wifi className="w-3 h-3" />
-                <Battery className="w-3.5 h-3.5" />
+              {/* Browser Screen Image */}
+              <div className="relative flex-1 w-full h-[calc(100%-2rem)] overflow-hidden bg-slate-950">
+                <img
+                  src={projects[hoveredIndex].image}
+                  alt={projects[hoveredIndex].title}
+                  className="w-full h-full object-cover object-top transition-transform duration-500"
+                />
+
+                {/* Bottom floating badge inside desktop UI */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3 pt-6 flex items-end justify-between">
+                  <div>
+                    <div className="text-[10px] font-mono text-indigo-300 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                      {projects[hoveredIndex].tag || projects[hoveredIndex].category}
+                    </div>
+                    <div className="text-white text-sm font-bold leading-tight mt-0.5">
+                      {projects[hoveredIndex].title}
+                    </div>
+                  </div>
+                  <div className="w-7 h-7 rounded-lg bg-indigo-600/90 text-white flex items-center justify-center text-xs shadow-lg shadow-indigo-600/40 border border-indigo-400/30">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
+                </div>
               </div>
+
             </div>
+          </div>
+        ) : (
+          /* Sleek Smartphone Phone Frame (Mobile) */
+          <div className="relative w-[240px] h-[460px] bg-[#0c111d] rounded-[42px] p-2.5 border-[5px] border-slate-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_30px_rgba(99,102,241,0.25)] ring-1 ring-white/20 transition-all duration-300">
+            
+            {/* Inner Phone Bezel & Screen */}
+            <div className="relative w-full h-full bg-[#090d16] rounded-[34px] overflow-hidden flex flex-col justify-between border border-white/10">
+              
+              {/* Top Status Bar with Dynamic Island */}
+              <div className="relative z-20 pt-2 px-5 flex items-center justify-between text-[10px] text-white/80 font-medium">
+                <span>9:41</span>
+                
+                {/* Dynamic Island Pill */}
+                <div className="w-16 h-4 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 border border-white/10 shadow-inner">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/60" />
+                </div>
 
-            {/* Mobile Screen Contents */}
-            <div className="absolute inset-0 pt-8 pb-6 px-1.5 overflow-hidden">
-              {projects.map((project, index) => (
-                <div
-                  key={project.id || project.title}
-                  className="absolute inset-0 w-full h-full p-2 flex flex-col items-center justify-center transition-all duration-500 ease-out"
-                  style={{
-                    opacity: hoveredIndex === index ? 1 : 0,
-                    transform: hoveredIndex === index ? "scale(1) translateY(0)" : "scale(1.08) translateY(12px)",
-                    filter: hoveredIndex === index ? "none" : "blur(10px)",
-                  }}
-                >
-                  {/* Phone Screen Wallpaper / UI */}
-                  <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950 flex flex-col">
-                    <img
-                      src={project.image || "/images/projects/nunya-mobile-leaderboard.png"}
-                      alt={`Interface ${project.title}`}
-                      className="w-full h-full object-cover object-top"
-                    />
-                    
-                    {/* Bottom floating badge inside mobile UI */}
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 pt-6 flex items-end justify-between">
-                      <div>
-                        <div className="text-[10px] font-mono text-indigo-300 font-semibold uppercase">
-                          {project.category}
+                <div className="flex items-center gap-1.5">
+                  <Wifi className="w-3 h-3" />
+                  <Battery className="w-3.5 h-3.5" />
+                </div>
+              </div>
+
+              {/* Mobile Screen Contents */}
+              <div className="absolute inset-0 pt-8 pb-6 px-1.5 overflow-hidden">
+                {projects.map((project, index) => (
+                  <div
+                    key={project.id || project.title}
+                    className="absolute inset-0 w-full h-full p-2 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                    style={{
+                      opacity: hoveredIndex === index ? 1 : 0,
+                      transform: hoveredIndex === index ? "scale(1) translateY(0)" : "scale(1.08) translateY(12px)",
+                      filter: hoveredIndex === index ? "none" : "blur(10px)",
+                    }}
+                  >
+                    {/* Phone Screen Wallpaper / UI */}
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950 flex flex-col">
+                      <img
+                        src={project.image || "/images/projects/nunya-mobile-real.png"}
+                        alt={`Interface ${project.title}`}
+                        className="w-full h-full object-cover object-top"
+                      />
+                      
+                      {/* Bottom floating badge inside mobile UI */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 pt-6 flex items-end justify-between">
+                        <div>
+                          <div className="text-[10px] font-mono text-indigo-300 font-semibold uppercase">
+                            {project.category}
+                          </div>
+                          <div className="text-white text-xs font-bold leading-tight mt-0.5">
+                            {project.title}
+                          </div>
                         </div>
-                        <div className="text-white text-xs font-bold leading-tight mt-0.5">
-                          {project.title}
+                        <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px]">
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </div>
-                      </div>
-                      <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px]">
-                        <ArrowUpRight className="w-3.5 h-3.5" />
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Bottom Home Indicator Bar */}
-            <div className="relative z-20 pb-1.5 flex justify-center">
-              <div className="w-24 h-1 bg-white/40 rounded-full" />
-            </div>
+              {/* Bottom Home Indicator Bar */}
+              <div className="relative z-20 pb-1.5 flex justify-center">
+                <div className="w-24 h-1 bg-white/40 rounded-full" />
+              </div>
 
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Projects List */}
       <div className="space-y-0">
         {projects.map((project, index) => {
           const isHovered = hoveredIndex === index;
+          const isDesktopLayout = project.originalProject?.previewLayout === "desktop";
 
           return (
             <div
@@ -296,36 +361,63 @@ export function ProjectShowcase({
 
                 </div>
 
-                {/* Mobile / Tablet View: Phone Mockup Frame */}
+                {/* Mobile / Tablet View Mockup (Responsive) */}
                 <div className="block lg:hidden mt-5">
-                  <div className="relative mx-auto max-w-[240px] h-[400px] bg-[#0c111d] rounded-[36px] p-2 border-[4px] border-slate-700/80 shadow-xl overflow-hidden">
-                    <div className="relative w-full h-full bg-[#090d16] rounded-[28px] overflow-hidden flex flex-col justify-between border border-white/10">
-                      
-                      {/* Mini top notch */}
-                      <div className="relative z-10 pt-2 px-3 flex justify-between items-center text-[9px] text-white/70">
-                        <span>9:41</span>
-                        <div className="w-12 h-3 bg-black rounded-full" />
-                        <div className="flex items-center gap-1">
-                          <Wifi className="w-2.5 h-2.5" />
-                          <Battery className="w-2.5 h-2.5" />
+                  {isDesktopLayout ? (
+                    /* Wide Desktop Browser Mockup on Mobile/Tablet */
+                    <div className="relative mx-auto max-w-md w-full bg-[#0c111d] rounded-2xl p-2 border border-slate-700/80 shadow-xl overflow-hidden">
+                      <div className="relative w-full bg-[#090d16] rounded-xl overflow-hidden flex flex-col border border-white/10">
+                        <div className="h-7 bg-slate-900/90 border-b border-white/10 px-3 flex items-center justify-between">
+                          <div className="flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-rose-500/80 inline-block" />
+                            <span className="w-2 h-2 rounded-full bg-amber-500/80 inline-block" />
+                            <span className="w-2 h-2 rounded-full bg-emerald-500/80 inline-block" />
+                          </div>
+                          <span className="text-[9px] font-mono text-slate-400 truncate max-w-[180px]">
+                            {project.title}
+                          </span>
+                          <span className="text-[8px] font-mono text-slate-600">Preview</span>
+                        </div>
+                        <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
+                          <img
+                            src={project.image}
+                            alt={`Aperçu ${project.title}`}
+                            className="w-full h-full object-cover object-top"
+                          />
                         </div>
                       </div>
+                    </div>
+                  ) : (
+                    /* Smartphone Frame on Mobile/Tablet */
+                    <div className="relative mx-auto max-w-[240px] h-[400px] bg-[#0c111d] rounded-[36px] p-2 border-[4px] border-slate-700/80 shadow-xl overflow-hidden">
+                      <div className="relative w-full h-full bg-[#090d16] rounded-[28px] overflow-hidden flex flex-col justify-between border border-white/10">
+                        
+                        {/* Mini top notch */}
+                        <div className="relative z-10 pt-2 px-3 flex justify-between items-center text-[9px] text-white/70">
+                          <span>9:41</span>
+                          <div className="w-12 h-3 bg-black rounded-full" />
+                          <div className="flex items-center gap-1">
+                            <Wifi className="w-2.5 h-2.5" />
+                            <Battery className="w-2.5 h-2.5" />
+                          </div>
+                        </div>
 
-                      {/* Screen Image */}
-                      <div className="absolute inset-0 pt-7 pb-4 px-1">
-                        <img
-                          src={project.image || "/images/projects/nunya-mobile-leaderboard.png"}
-                          alt={`Interface mobile ${project.title}`}
-                          className="w-full h-full object-cover object-top rounded-xl"
-                        />
-                      </div>
+                        {/* Screen Image */}
+                        <div className="absolute inset-0 pt-7 pb-4 px-1">
+                          <img
+                            src={project.image || "/images/projects/nunya-mobile-real.png"}
+                            alt={`Interface mobile ${project.title}`}
+                            className="w-full h-full object-cover object-top rounded-xl"
+                          />
+                        </div>
 
-                      {/* Bottom indicator */}
-                      <div className="relative z-10 pb-1 flex justify-center">
-                        <div className="w-16 h-1 bg-white/40 rounded-full" />
+                        {/* Bottom indicator */}
+                        <div className="relative z-10 pb-1 flex justify-center">
+                          <div className="w-16 h-1 bg-white/40 rounded-full" />
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
                   
                   <div className="text-center mt-2.5">
                     <span className="text-[11px] text-indigo-400 font-medium inline-flex items-center gap-1 hover:underline">

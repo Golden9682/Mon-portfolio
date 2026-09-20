@@ -22,6 +22,7 @@ export interface Project {
   iconName: string;
   logoUrl?: string;
   previewImage?: string;
+  previewLayout?: "mobile" | "desktop";
 }
 
 export const projectsData: Project[] = [
@@ -35,6 +36,7 @@ export const projectsData: Project[] = [
     period: "2024 – Présent",
     logoUrl: "/images/projects/nunya-logo.png",
     previewImage: "/images/projects/nunya-mobile-real.png",
+    previewLayout: "mobile",
     description: "Application mobile gamifiée pour les élèves togolais préparant le BEPC, BAC 1 et BAC 2 avec annales officielles, classements mensuels et paiements Mobile Money.",
     longDescription: "NUNYA a été conçu pour résoudre le défi d'accès aux ressources éducatives de qualité au Togo. L'application intègre un mode 100% hors-ligne indispensable pour les zones à faible connectivité, un système de récompenses financières mensuelles pour stimuler les meilleurs élèves, et une sécurité renforcée contre la triche.",
     metrics: [
@@ -80,6 +82,7 @@ export const projectsData: Project[] = [
     period: "2024",
     logoUrl: "/images/projects/rapido-logo.png",
     previewImage: "/images/projects/rapido-mobile-real.png",
+    previewLayout: "mobile",
     description: "Écosystème complet de commande et livraison comprenant une application mobile pour les utilisateurs, un tableau de bord administrateur et un backend haute performance.",
     longDescription: "Architecture complète à 4 volets conçue pour gérer le cycle de vie complet d'une commande : catalogue en ligne, prise de commande client, assignation aux livreurs et supervision administrative en temps réel.",
     metrics: [
@@ -116,7 +119,8 @@ export const projectsData: Project[] = [
     featured: true,
     period: "2024",
     logoUrl: "/images/projects/assistant-dg-icon.png",
-    previewImage: "/images/projects/assistant-dg-workflow.jpg",
+    previewImage: "/images/projects/assistant-dg-wide.jpg",
+    previewLayout: "desktop",
     description: "Solution intelligente d'assistance à la Direction Générale : transcription audio, génération & lecture PDF/Excel, planificateur de rappels et génération automatique de rapports.",
     longDescription: "Un outil sur-mesure créé pour décharger les dirigeants de tâches chronophages. Il permet de dicter des notes (transcription vocale), d'extraire automatiquement des données de documents PDF et Excel, et de générer des synthèses d'activité complètes et des alertes par e-mail en un clic.",
     metrics: [
@@ -153,7 +157,8 @@ export const projectsData: Project[] = [
     tag: "Automatisation & IA",
     featured: true,
     period: "2023 – Présent",
-    previewImage: "/images/projects/bot-automation-workflow.jpg",
+    previewImage: "/images/projects/bots-telegram-wide.jpg",
+    previewLayout: "desktop",
     description: "Système autonome de scraping d'appels à projets et de financements du web, extraction des données clés et livraison quotidienne résumée via Telegram et Email.",
     longDescription: "Développement d'un pipeline de données pour une organisation non gouvernementale : le bot scrape quotidiennement de multiples plateformes d'appels d'offres et opportunités de subventions, en extrait les critères d'éligibilité, dates limites et budgets avec un moteur d'IA, et génère des synthèses prêtes à l'action.",
     metrics: [
@@ -188,12 +193,13 @@ export const projectsData: Project[] = [
     tag: "Web App & Production",
     featured: false,
     period: "2023",
-    previewImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
-    description: "Site vitrine et système de commande interactif pour un service traiteur, incluant un menu dynamique multi-cuisines, une galerie et la prise de contact instantanée.",
-    longDescription: "Création d'une identité de marque digitale avec une interface accueillante, rapide et entièrement optimisée pour mobile et desktop, déployée en production sur Netlify.",
+    previewImage: "/images/projects/food-et-cie-wide.jpg",
+    previewLayout: "desktop",
+    description: "Site vitrine et système de commande interactif pour un service traiteur d'exception, incluant un menu dynamique multi-cuisines (Européenne, Africaine & Asiatique) et commande en ligne.",
+    longDescription: "Conception complète de l'application web pour Food et Cie : identité de marque élégante, présentation des menus traiteur d'exception, système de commande en ligne et réservation événementielle déployé en production sur Netlify.",
     highlights: [
-      "Menu interactif avec filtrage par type de cuisine et gestion des commandes.",
-      "Design épuré, responsive et optimisé pour le référencement local.",
+      "Menu interactif avec filtrage par type de cuisine (Européenne, Africaine, Asiatique) et panier de commande.",
+      "Design haut de gamme épuré, responsive et optimisé pour le référencement local.",
       "Déploiement continu automatisé sur Netlify."
     ],
     techStack: [
@@ -218,6 +224,7 @@ export const projectsData: Project[] = [
     featured: false,
     period: "2023",
     previewImage: "/images/projects/zombie-shock-preview.png",
+    previewLayout: "mobile",
     description: "Conception d'assets 2D, sprites, interfaces dynamiques et mécaniques de gameplay pour jeux vidéo et divertissement mobile.",
     longDescription: "Projet d'exploration et de création dans le domaine du gaming mobile : design des personnages, environnement interactif, intégration d'effets visuels et optimisation des performances sur smartphone.",
     highlights: [

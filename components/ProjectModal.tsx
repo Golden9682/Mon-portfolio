@@ -187,23 +187,86 @@ function ModalContent({
           transition={{ delay: 0.26, duration: 0.5, ease: EASE }}
           className="space-y-7"
         >
-          {/* Mobile UI Preview if available */}
+          {/* Project Preview (Desktop Browser or Mobile Smartphone Frame) */}
           {project.previewImage && (
             <div className="rounded-2xl bg-black/40 border border-white/10 p-4 sm:p-6 flex flex-col items-center justify-center overflow-hidden">
-              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-3">
-                Aperçu Réel de l&apos;Application Mobile
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                {project.previewLayout === "desktop"
+                  ? "Aperçu de la Plateforme & Architecture Système"
+                  : "Aperçu Réel de l'Application Mobile"}
               </span>
-              <div className="relative max-w-[280px] w-full h-[520px] bg-[#0c111d] rounded-[42px] p-2.5 border-[5px] border-slate-700/80 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_25px_rgba(99,102,241,0.2)] overflow-hidden ring-1 ring-white/10">
-                <div className="relative w-full h-full bg-[#090d16] rounded-[34px] overflow-hidden flex flex-col justify-between border border-white/10">
-                  <div className="absolute inset-0">
-                    <img
-                      src={project.previewImage}
-                      alt={`Interface ${project.title}`}
-                      className="w-full h-full object-cover object-top"
-                    />
+
+              {project.previewLayout === "desktop" ? (
+                /* Wide Desktop Browser Mockup in Modal */
+                <div className="relative w-full max-w-2xl bg-[#0c111d] rounded-2xl p-2.5 sm:p-3 border border-slate-700/80 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(99,102,241,0.25)] overflow-hidden ring-1 ring-white/15">
+                  <div className="relative w-full bg-[#090d16] rounded-xl overflow-hidden flex flex-col border border-white/10 shadow-inner">
+                    
+                    {/* Header */}
+                    <div className="h-8 bg-slate-900/95 border-b border-white/10 px-3.5 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                      </div>
+
+                      <div className="flex items-center gap-1.5 px-3 py-0.5 rounded-md bg-black/50 border border-white/10 text-[11px] text-slate-300 font-mono max-w-[280px] truncate">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                        <span className="text-slate-400">https://</span>
+                        <span className="text-indigo-300 font-semibold">
+                          {project.id === "food-et-cie"
+                            ? "food-et-cie.netlify.app"
+                            : project.id === "assistant-dg"
+                            ? "assistant-dg.enterprise/workflow"
+                            : "bot-pipeline.ai/telegram-engine"}
+                        </span>
+                      </div>
+
+                      <span className="text-[10px] font-mono text-slate-500 hidden sm:inline">1080p HD</span>
+                    </div>
+
+                    {/* Image */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
+                      <img
+                        src={project.previewImage}
+                        alt={`Interface ${project.title}`}
+                        className="w-full h-full object-cover object-top"
+                      />
+                    </div>
+
                   </div>
                 </div>
-              </div>
+              ) : (
+                /* Sleek Smartphone Mockup in Modal */
+                <div className="relative max-w-[280px] w-full h-[520px] bg-[#0c111d] rounded-[42px] p-2.5 border-[5px] border-slate-700/80 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_25px_rgba(99,102,241,0.2)] overflow-hidden ring-1 ring-white/10">
+                  <div className="relative w-full h-full bg-[#090d16] rounded-[34px] overflow-hidden flex flex-col justify-between border border-white/10">
+                    
+                    {/* Top Status Bar with Dynamic Island */}
+                    <div className="relative z-20 pt-2 px-5 flex items-center justify-between text-[10px] text-white/80 font-medium">
+                      <span>9:41</span>
+                      <div className="w-16 h-4 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 border border-white/10 shadow-inner">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/60" />
+                      </div>
+                      <span className="text-[10px] text-white/60">5G</span>
+                    </div>
+
+                    <div className="absolute inset-0 pt-7 pb-4 px-1">
+                      <img
+                        src={project.previewImage}
+                        alt={`Interface ${project.title}`}
+                        className="w-full h-full object-cover object-top rounded-2xl"
+                      />
+                    </div>
+
+                    {/* Bottom Home Indicator Bar */}
+                    <div className="relative z-20 pb-1.5 flex justify-center">
+                      <div className="w-24 h-1 bg-white/40 rounded-full" />
+                    </div>
+
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
