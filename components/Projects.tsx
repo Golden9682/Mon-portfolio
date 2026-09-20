@@ -66,6 +66,7 @@ export function Projects() {
     tag: p.tag,
     link: p.links.live || "#",
     image: p.previewImage || p.logoUrl || "/images/projects/nunya-logo.png",
+    images: p.screenshots ?? (p.previewImage ? [p.previewImage] : undefined),
     logo: p.logoUrl,
     techStack: p.techStack.slice(0, 4),
     originalProject: p,

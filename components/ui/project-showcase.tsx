@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { 
   ArrowUpRight, 
   Sparkles, 
@@ -25,6 +25,8 @@ export interface ShowcaseProject {
   tag?: string;
   link?: string;
   image: string;
+  /** Ordered screenshots; the hover preview cycles through them. */
+  images?: string[];
   logo?: string;
   techStack?: string[];
   originalProject?: Project;
@@ -50,6 +52,33 @@ export function ProjectShowcase({
   );
   const { containerRef, floatRef, hoveredIndex, isVisible, onMouseMove, show, hide } =
     useCursorFollower({ offset });
+
+  // Slideshow inside the device frame: cycles the hovered project's screenshots.
+  const [slide, setSlide] = useState(0);
+  const hoveredShots =
+    hoveredIndex !== null ? projects[hoveredIndex]?.images ?? [projects[hoveredIndex]?.image] : [];
+  useEffect(() => {
+    setSlide(0);
+    if (hoveredShots.length < 2) return;
+    const id = setInterval(() => setSlide((i) => (i + 1) % hoveredShots.length), 2200);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hoveredIndex]);
+
+  const Dots = ({ count, className }: { count: number; className?: string }) =>
+    count > 1 ? (
+      <div className={cn("flex items-center gap-1", className)} aria-hidden>
+        {Array.from({ length: count }).map((_, i) => (
+          <span
+            key={i}
+            className={cn(
+              "h-1 rounded-full transition-all duration-300",
+              i === slide ? "w-4 bg-indigo-400" : "w-1.5 bg-white/30"
+            )}
+          />
+        ))}
+      </div>
+    ) : null;
 
   return (
     <div
@@ -100,13 +129,18 @@ export function ProjectShowcase({
 
               {/* Browser Screen Image */}
               <div className="relative flex-1 w-full h-[calc(100%-2rem)] overflow-hidden bg-slate-950">
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={projects[hoveredIndex].image}
-                  alt={projects[hoveredIndex].title}
-                  className="w-full h-full object-cover object-top transition-transform duration-500"
-                />
+                {hoveredShots.map((src, i) => (
+                  <img
+                    key={src}
+                    loading="lazy"
+                    decoding="async"
+                    src={src}
+                    alt={`${projects[hoveredIndex].title} — capture ${i + 1}`}
+                    className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700"
+                    style={{ opacity: i === slide ? 1 : 0 }}
+                  />
+                ))}
+                <Dots count={hoveredShots.length} className="absolute top-2.5 right-3 z-10" />
 
                 {/* Bottom floating badge inside desktop UI */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent p-3 pt-6 flex items-end justify-between">
@@ -164,13 +198,22 @@ export function ProjectShowcase({
                   >
                     {/* Phone Screen Wallpaper / UI */}
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950 flex flex-col">
-                      <img
-                        loading="lazy"
-                        decoding="async"
-                        src={project.image || "/images/projects/nunya-mobile-real.png"}
-                        alt={`Interface ${project.title}`}
-                        className="w-full h-full object-cover object-top"
-                      />
+                      {(project.images ?? [project.image || "/images/projects/nunya-mobile-real.png"]).map(
+                        (src, i) => (
+                          <img
+                            key={src}
+                            loading="lazy"
+                            decoding="async"
+                            src={src}
+                            alt={`Interface ${project.title} — écran ${i + 1}`}
+                            className="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700"
+                            style={{ opacity: hoveredIndex === index && i === slide ? 1 : i === 0 && hoveredIndex !== index ? 1 : 0 }}
+                          />
+                        )
+                      )}
+                      {hoveredIndex === index && (
+                        <Dots count={(project.images ?? [project.image]).length} className="absolute top-2.5 left-1/2 -translate-x-1/2 z-10" />
+                      )}
                       
                       {/* Bottom floating badge inside mobile UI */}
                       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 pt-6 flex items-end justify-between">

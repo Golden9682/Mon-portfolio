@@ -21,8 +21,11 @@ export interface Project {
   accentColor: string;
   iconName: string;
   logoUrl?: string;
+  /** Kept for backwards compatibility: first screenshot. */
   previewImage?: string;
   previewLayout?: "mobile" | "desktop";
+  /** Ordered screenshots shown in the hover preview and the modal gallery. */
+  screenshots?: string[];
 }
 
 export const projectsData: Project[] = [
@@ -37,6 +40,11 @@ export const projectsData: Project[] = [
     logoUrl: "/images/projects/nunya-logo.png",
     previewImage: "/images/projects/nunya-mobile-real.png",
     previewLayout: "mobile",
+    screenshots: [
+      "/images/projects/nunya-mobile-real.png",
+      "/images/projects/nunya-quiz.png",
+      "/images/projects/nunya-premium.png",
+    ],
     description: "Application mobile gamifiée pour les élèves togolais préparant le BEPC, BAC 1 et BAC 2 avec annales officielles, classements mensuels et paiements Mobile Money.",
     longDescription: "NUNYA a été conçu pour résoudre le défi d'accès aux ressources éducatives de qualité au Togo. L'application intègre un mode 100% hors-ligne indispensable pour les zones à faible connectivité, un système de récompenses financières mensuelles pour stimuler les meilleurs élèves, et une sécurité renforcée contre la triche.",
     metrics: [
@@ -119,8 +127,13 @@ export const projectsData: Project[] = [
     featured: true,
     period: "2024",
     logoUrl: "/images/projects/assistant-dg-icon.png",
-    previewImage: "/images/projects/assistant-dg-wide.jpg",
+    previewImage: "/images/projects/assistant-dg-dashboard.jpg",
     previewLayout: "desktop",
+    screenshots: [
+      "/images/projects/assistant-dg-dashboard.jpg",
+      "/images/projects/assistant-dg-chat.jpg",
+      "/images/projects/assistant-dg-tasks.jpg",
+    ],
     description: "Solution intelligente d'assistance à la Direction Générale : transcription audio, génération & lecture PDF/Excel, planificateur de rappels et génération automatique de rapports.",
     longDescription: "Un outil sur-mesure créé pour décharger les dirigeants de tâches chronophages. Il permet de dicter des notes (transcription vocale), d'extraire automatiquement des données de documents PDF et Excel, et de générer des synthèses d'activité complètes et des alertes par e-mail en un clic.",
     metrics: [
@@ -193,8 +206,9 @@ export const projectsData: Project[] = [
     tag: "Web App & Production",
     featured: false,
     period: "2023",
-    previewImage: "/images/projects/food-et-cie-wide.jpg",
+    previewImage: "/images/projects/food-et-cie-home.jpg",
     previewLayout: "desktop",
+    screenshots: ["/images/projects/food-et-cie-home.jpg"],
     description: "Site vitrine et système de commande interactif pour un service traiteur d'exception, incluant un menu dynamique multi-cuisines (Européenne, Africaine & Asiatique) et commande en ligne.",
     longDescription: "Conception complète de l'application web pour Food et Cie : identité de marque élégante, présentation des menus traiteur d'exception, système de commande en ligne et réservation événementielle déployé en production sur Netlify.",
     highlights: [
