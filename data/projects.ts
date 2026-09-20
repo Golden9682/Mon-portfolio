@@ -21,6 +21,7 @@ export interface Project {
   accentColor: string;
   iconName: string;
   logoUrl?: string;
+  previewImage?: string;
 }
 
 export const projectsData: Project[] = [
@@ -33,6 +34,7 @@ export const projectsData: Project[] = [
     featured: true,
     period: "2024 – Présent",
     logoUrl: "/images/projects/nunya-logo.png",
+    previewImage: "/images/projects/nunya-badge.png",
     description: "Application mobile gamifiée pour les élèves togolais préparant le BEPC, BAC 1 et BAC 2 avec annales officielles, classements mensuels et paiements Mobile Money.",
     longDescription: "NUNYA a été conçu pour résoudre le défi d'accès aux ressources éducatives de qualité au Togo. L'application intègre un mode 100% hors-ligne indispensable pour les zones à faible connectivité, un système de récompenses financières mensuelles pour stimuler les meilleurs élèves, et une sécurité renforcée contre la triche.",
     metrics: [
@@ -69,6 +71,43 @@ export const projectsData: Project[] = [
     iconName: "Smartphone"
   },
   {
+    id: "rapido",
+    title: "XRAPIDO",
+    subtitle: "Plateforme Multi-Service de Commande & Livraison Rapide",
+    category: "mobile",
+    tag: "Full-Stack & Logistique",
+    featured: true,
+    period: "2024",
+    logoUrl: "/images/projects/rapido-logo.png",
+    previewImage: "/images/projects/rapido-scooter.png",
+    description: "Écosystème complet de commande et livraison comprenant une application mobile pour les utilisateurs, un tableau de bord administrateur et un backend haute performance.",
+    longDescription: "Architecture complète à 4 volets conçue pour gérer le cycle de vie complet d'une commande : catalogue en ligne, prise de commande client, assignation aux livreurs et supervision administrative en temps réel.",
+    metrics: [
+      { label: "Architecture", value: "4 Modules complets" },
+      { label: "Temps réel", value: "Gestion des flux de livraison" },
+      { label: "Backend", value: "API REST sécurisée" }
+    ],
+    highlights: [
+      "Application mobile utilisateur fluide pour la navigation dans les catalogues et le passage de commande.",
+      "Panneau d'administration web dédié à la gestion des commandes, des livreurs et des statistiques.",
+      "Backend REST centralisé pour la synchronisation en direct des statuts de livraison.",
+      "Frontend web moderne et responsive pour les commandes en ligne directes."
+    ],
+    techStack: [
+      "React Native",
+      "React.js",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "REST API"
+    ],
+    links: {},
+    gradient: "from-cyan-500/20 via-sky-500/10 to-transparent",
+    accentColor: "#06b6d4",
+    iconName: "Truck"
+  },
+  {
     id: "assistant-dg",
     title: "Assistant DG",
     subtitle: "Suite d'Automatisation & Productivité de Direction",
@@ -76,6 +115,8 @@ export const projectsData: Project[] = [
     tag: "Productivité & IA Entreprise",
     featured: true,
     period: "2024",
+    logoUrl: "/images/projects/assistant-dg-icon.png",
+    previewImage: "/images/projects/assistant-dg-icon.png",
     description: "Solution intelligente d'assistance à la Direction Générale : transcription audio, génération & lecture PDF/Excel, planificateur de rappels et génération automatique de rapports.",
     longDescription: "Un outil sur-mesure créé pour décharger les dirigeants de tâches chronophages. Il permet de dicter des notes (transcription vocale), d'extraire automatiquement des données de documents PDF et Excel, et de générer des synthèses d'activité complètes et des alertes par e-mail en un clic.",
     metrics: [
@@ -105,42 +146,6 @@ export const projectsData: Project[] = [
     iconName: "Briefcase"
   },
   {
-    id: "rapido",
-    title: "XRAPIDO",
-    subtitle: "Plateforme Multi-Service de Commande & Livraison Rapide",
-    category: "mobile",
-    tag: "Full-Stack & Logistique",
-    featured: true,
-    period: "2024",
-    logoUrl: "/images/projects/rapido-logo.png",
-    description: "Écosystème complet de commande et livraison comprenant une application mobile pour les utilisateurs, un tableau de bord administrateur et un backend haute performance.",
-    longDescription: "Architecture complète à 4 volets conçue pour gérer le cycle de vie complet d'une commande : catalogue en ligne, prise de commande client, assignation aux livreurs et supervision administrative en temps réel.",
-    metrics: [
-      { label: "Architecture", value: "4 Modules complets" },
-      { label: "Temps réel", value: "Gestion des flux de livraison" },
-      { label: "Backend", value: "API REST sécurisée" }
-    ],
-    highlights: [
-      "Application mobile utilisateur fluide pour la navigation dans les catalogues et le passage de commande.",
-      "Panneau d'administration web dédié à la gestion des commandes, des livreurs et des statistiques.",
-      "Backend REST centralisé pour la synchronisation en direct des statuts de livraison.",
-      "Frontend web moderne et responsive pour les commandes en ligne directes."
-    ],
-    techStack: [
-      "React Native",
-      "React.js",
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "Tailwind CSS",
-      "REST API"
-    ],
-    links: {},
-    gradient: "from-cyan-500/20 via-sky-500/10 to-transparent",
-    accentColor: "#06b6d4",
-    iconName: "Truck"
-  },
-  {
     id: "bots-automation",
     title: "Scrapers & Bots IA (N8N & Telegram)",
     subtitle: "Pipelines de Veille & Automatisation pour ONG et Entreprises",
@@ -148,6 +153,7 @@ export const projectsData: Project[] = [
     tag: "Automatisation & IA",
     featured: true,
     period: "2023 – Présent",
+    previewImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
     description: "Système autonome de scraping d'appels à projets et de financements du web, extraction des données clés et livraison quotidienne résumée via Telegram et Email.",
     longDescription: "Développement d'un pipeline de données pour une organisation non gouvernementale : le bot scrape quotidiennement de multiples plateformes d'appels d'offres et opportunités de subventions, en extrait les critères d'éligibilité, dates limites et budgets avec un moteur d'IA, et génère des synthèses prêtes à l'action.",
     metrics: [
@@ -182,6 +188,7 @@ export const projectsData: Project[] = [
     tag: "Web App & Production",
     featured: false,
     period: "2023",
+    previewImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
     description: "Site vitrine et système de commande interactif pour un service traiteur, incluant un menu dynamique multi-cuisines, une galerie et la prise de contact instantanée.",
     longDescription: "Création d'une identité de marque digitale avec une interface accueillante, rapide et entièrement optimisée pour mobile et desktop, déployée en production sur Netlify.",
     highlights: [
@@ -201,5 +208,32 @@ export const projectsData: Project[] = [
     gradient: "from-orange-500/20 via-rose-500/10 to-transparent",
     accentColor: "#f97316",
     iconName: "Utensils"
+  },
+  {
+    id: "zombie-shock",
+    title: "Zombie Shock & Game Lab",
+    subtitle: "Développement de Jeu Vidéo & Création Graphique",
+    category: "mobile",
+    tag: "Mobile Game & Assets",
+    featured: false,
+    period: "2023",
+    previewImage: "/images/projects/zombie-shock-preview.png",
+    description: "Conception d'assets 2D, sprites, interfaces dynamiques et mécaniques de gameplay pour jeux vidéo et divertissement mobile.",
+    longDescription: "Projet d'exploration et de création dans le domaine du gaming mobile : design des personnages, environnement interactif, intégration d'effets visuels et optimisation des performances sur smartphone.",
+    highlights: [
+      "Création complète d'assets graphiques, personnages et décors de jeu.",
+      "Développement de mécaniques de jeu interactives et réactives.",
+      "Gestion de la physique 2D, des collisions et de l'audio."
+    ],
+    techStack: [
+      "Game Engine / 2D",
+      "JavaScript / TypeScript",
+      "Sprite Design",
+      "Mobile Performance"
+    ],
+    links: {},
+    gradient: "from-rose-500/20 via-red-500/10 to-transparent",
+    accentColor: "#f43f5e",
+    iconName: "Smartphone"
   }
 ];
