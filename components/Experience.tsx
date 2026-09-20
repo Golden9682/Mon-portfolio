@@ -2,92 +2,129 @@
 
 import React from "react";
 import { experiencesData } from "@/data/experiences";
-import { Briefcase, GraduationCap, Calendar, MapPin, CheckCircle2, Award } from "lucide-react";
+import { Briefcase, GraduationCap, MapPin, CheckCircle2, Award } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal, m } from "@/components/ui/motion";
+import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { cn } from "@/lib/utils";
 
 export function Experience() {
   return (
-    <section id="parcours" className="py-20 relative">
+    <section id="parcours" className="py-20 md:py-28 relative">
+      <div className="divider-glow absolute top-0 left-0 right-0" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-3">
-            <Award className="w-3.5 h-3.5" />
-            Expériences &amp; Formation
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            Parcours Professionnel &amp; Académique
-          </h2>
-          <p className="text-slate-400 text-sm sm:text-base mt-2">
-            Une trajectoire marquée par l&apos;entrepreneuriat numérique, des projets concrets et une solide formation en communication.
-          </p>
-        </div>
+        <SectionHeader
+          accent="emerald"
+          icon={<Award className="w-3.5 h-3.5" />}
+          eyebrow="Expériences & Formation"
+          title="Parcours Professionnel & Académique"
+          description="Une trajectoire marquée par l'entrepreneuriat numérique, des projets concrets et une solide formation en communication."
+          className="mb-16"
+        />
 
         {/* Timeline */}
-        <div className="relative border-l border-white/10 ml-4 md:ml-32 space-y-12">
-          {experiencesData.map((item, idx) => (
-            <div key={item.id} className="relative pl-6 md:pl-8 group">
-              
-              {/* Timeline marker icon */}
-              <div className="absolute -left-[17px] top-1.5 w-8 h-8 rounded-full bg-[#0d1322] border-2 border-indigo-500 flex items-center justify-center text-indigo-400 shadow-md shadow-indigo-500/30 group-hover:scale-110 transition-transform">
-                {item.type === "work" ? (
-                  <Briefcase className="w-3.5 h-3.5" />
-                ) : (
-                  <GraduationCap className="w-3.5 h-3.5 text-cyan-400" />
-                )}
-              </div>
+        <div className="relative ml-4 md:ml-36">
+          {/* Vertical line: static base + animated gradient fill */}
+          <div aria-hidden className="absolute left-0 top-2 bottom-2 w-px bg-white/[0.08]" />
+          <m.div
+            aria-hidden
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-0 top-2 bottom-2 w-px origin-top bg-gradient-to-b from-indigo-500 via-cyan-400 to-emerald-400/0"
+          />
 
-              {/* Period badge (on left for wide screens) */}
-              <div className="md:absolute md:-left-36 md:top-2 md:text-right md:w-28 text-xs font-mono text-indigo-400 font-semibold mb-2 md:mb-0">
-                {item.period}
-              </div>
+          <ol className="space-y-10 md:space-y-12">
+            {experiencesData.map((item, idx) => {
+              const isWork = item.type === "work";
+              const accent = isWork ? "indigo" : "cyan";
 
-              {/* Card content */}
-              <div className="glass-panel p-6 rounded-2xl border border-white/10 glass-panel-hover space-y-3">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-indigo-300 transition-colors">
-                    {item.title}
-                  </h3>
-                  <span className="flex items-center gap-1 text-xs text-slate-400">
-                    <MapPin className="w-3 h-3 text-emerald-400" /> {item.location}
-                  </span>
-                </div>
+              return (
+                <Reveal
+                  key={item.id}
+                  as="li"
+                  delay={idx * 0.05}
+                  amount={0.2}
+                  className="relative pl-8 md:pl-10 group"
+                >
+                  {/* Timeline marker */}
+                  <div
+                    className={cn(
+                      "absolute -left-[15px] top-1 w-[30px] h-[30px] rounded-full bg-[#0d1322] border-2 flex items-center justify-center transition-transform duration-500 ease-out-expo group-hover:scale-110",
+                      isWork
+                        ? "border-indigo-500 text-indigo-400 shadow-[0_0_0_4px_rgba(99,102,241,0.12)]"
+                        : "border-cyan-500 text-cyan-400 shadow-[0_0_0_4px_rgba(6,182,212,0.12)]"
+                    )}
+                  >
+                    {isWork ? <Briefcase className="w-3.5 h-3.5" /> : <GraduationCap className="w-3.5 h-3.5" />}
+                  </div>
 
-                <div className="text-xs font-semibold text-slate-400">
-                  {item.organization}
-                </div>
-
-                <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-                  {item.description}
-                </p>
-
-                {/* Bullet points */}
-                <ul className="space-y-2 pt-2">
-                  {item.bulletPoints.map((point, pIdx) => (
-                    <li key={pIdx} className="flex items-start gap-2 text-xs sm:text-sm text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Badges */}
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
-                  {item.badges.map((badge, bIdx) => (
+                  {/* Period (left column on wide screens) */}
+                  <div className="md:absolute md:-left-[9.5rem] md:top-1.5 md:w-28 md:text-right mb-3 md:mb-0">
                     <span
-                      key={bIdx}
-                      className="text-[11px] font-medium px-2.5 py-0.5 rounded bg-white/5 border border-white/5 text-slate-300"
+                      className={cn(
+                        "inline-block text-xs font-mono font-semibold",
+                        isWork ? "text-indigo-300" : "text-cyan-300"
+                      )}
                     >
-                      {badge}
+                      {item.period}
                     </span>
-                  ))}
-                </div>
-              </div>
+                    <span
+                      className={cn(
+                        "block mt-1 text-[10px] uppercase tracking-[0.15em] font-semibold",
+                        isWork ? "text-indigo-500/80" : "text-cyan-500/80"
+                      )}
+                    >
+                      {isWork ? "Expérience" : "Formation"}
+                    </span>
+                  </div>
 
-            </div>
-          ))}
+                  {/* Card content */}
+                  <SpotlightCard accent={accent} className="p-6 sm:p-7 space-y-4">
+                    <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight transition-colors duration-300 group-hover:text-indigo-200">
+                          {item.title}
+                        </h3>
+                        <div className="text-sm font-medium text-slate-400 mt-1">{item.organization}</div>
+                      </div>
+                      <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 bg-white/[0.03] border border-white/[0.06] px-2.5 py-1 rounded-md shrink-0">
+                        <MapPin className="w-3 h-3 text-emerald-400" /> {item.location}
+                      </span>
+                    </div>
+
+                    <p className="text-slate-300/90 text-sm leading-relaxed text-pretty">{item.description}</p>
+
+                    {/* Bullet points */}
+                    <ul className="space-y-2.5 pt-1">
+                      {item.bulletPoints.map((point, pIdx) => (
+                        <li key={pIdx} className="flex items-start gap-2.5 text-sm text-slate-300">
+                          <CheckCircle2
+                            className={cn("w-4 h-4 mt-0.5 shrink-0", isWork ? "text-indigo-400" : "text-cyan-400")}
+                          />
+                          <span className="text-pretty">{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    {/* Badges */}
+                    <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/[0.06]">
+                      {item.badges.map((badge) => (
+                        <span
+                          key={badge}
+                          className="text-[11px] font-medium px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-slate-300 transition-colors hover:border-white/15 hover:text-white"
+                        >
+                          {badge}
+                        </span>
+                      ))}
+                    </div>
+                  </SpotlightCard>
+                </Reveal>
+              );
+            })}
+          </ol>
         </div>
-
       </div>
     </section>
   );

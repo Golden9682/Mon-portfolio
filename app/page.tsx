@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
+import { Services } from "@/components/Services";
 import { Projects } from "@/components/Projects";
 import { SkillsBento } from "@/components/SkillsBento";
 import { Experience } from "@/components/Experience";
@@ -13,6 +14,7 @@ export default function Home() {
     <main className="relative min-h-screen flex flex-col">
       <Navbar />
       <Hero />
+      <Services />
       <Projects />
       <SkillsBento />
       <Experience />

@@ -1,7 +1,24 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { MotionProvider } from "@/components/ui/motion";
 import "./globals.css";
 
+// Self-hosted via next/font: no external request, no layout shift.
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+  weight: ["400", "500", "600"],
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://funny-cobbler-414dbe.netlify.app"),
   title: "Kokou Komna Abdoul Raouf | Digital Developer & Automation Specialist",
   description: "Portfolio de Kokou Komna Abdoul Raouf — Développeur Full-Stack, Mobile (React Native) et Spécialiste de l'Automatisation & Fintech (FedaPay, Mobile Money) basé à Lomé, Togo.",
   keywords: [
@@ -24,15 +41,22 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#090d16",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="dark scroll-smooth">
-      <body className="min-h-screen bg-[#090d16] text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
-        {children}
+    <html lang="fr" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-screen bg-[#090d16] text-slate-100 antialiased">
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );
