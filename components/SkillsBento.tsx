@@ -200,6 +200,8 @@ export function SkillsBento() {
                       {/* Background Visual Image */}
                       <div className="absolute inset-0 overflow-hidden">
                         <img
+                          loading="lazy"
+                          decoding="async"
                           src={cat.image}
                           alt={cat.title}
                           className={cn(
@@ -398,6 +400,8 @@ export function SkillsBento() {
                 {/* Visual Header Image Banner */}
                 <div className="relative h-44 w-full overflow-hidden">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={activeCategory.image}
                     alt={activeCategory.title}
                     className="w-full h-full object-cover"

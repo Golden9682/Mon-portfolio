@@ -268,14 +268,16 @@ export const RadialScrollGallery = forwardRef<
           >
             {childrenNodes.map((child, index) => {
               const angle = (index / childrenCount) * 2 * Math.PI;
-              let x = currentRadius * Math.cos(angle);
-              const y = currentRadius * Math.sin(angle);
+              // Round to 2 decimals: Math.cos/sin can differ in the last
+              // digits between Node and the browser, which breaks hydration.
+              let x = Math.round(currentRadius * Math.cos(angle) * 100) / 100;
+              const y = Math.round(currentRadius * Math.sin(angle) * 100) / 100;
 
               if (direction === 'rtl') {
                 x = -x;
               }
 
-              const rotationAngle = (angle * 180) / Math.PI;
+              const rotationAngle = Math.round(((angle * 180) / Math.PI) * 100) / 100;
               const isHovered = hoveredIndex === index;
               const isAnyHovered = hoveredIndex !== null;
 

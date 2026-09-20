@@ -48,6 +48,7 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         "float-delayed": "float 7s ease-in-out 1.5s infinite",
         orbit: "orbit 18s linear infinite",
+        "spin-slow": "spin 8s linear infinite",
       },
       keyframes: {
         float: {
