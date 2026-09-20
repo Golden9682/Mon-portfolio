@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { skillCategories, SkillCategory } from "@/data/skills";
 import { RadialScrollGallery } from "@/components/ui/portfolio-and-image-gallery";
 import { Badge } from "@/components/ui/badge";
@@ -101,6 +101,12 @@ const spans: Record<string, string> = {
 export function SkillsBento() {
   const [viewMode, setViewMode] = useState<"wheel" | "grid">("wheel");
   const [activeCategory, setActiveCategory] = useState<SkillCategory | null>(null);
+
+  // The pinned 3D wheel clips its side cards below 768px: default to the grid
+  // there (after mount, so server and client render the same first frame).
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) setViewMode("grid");
+  }, []);
 
   return (
     <section id="competences" className="py-20 md:py-28 relative overflow-hidden">
