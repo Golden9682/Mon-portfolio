@@ -131,6 +131,8 @@ function ModalContent({
             {project.logoUrl ? (
               <div className="w-14 h-14 rounded-2xl bg-white/[0.08] border border-white/10 p-2 flex items-center justify-center shrink-0 overflow-hidden shadow-lg">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={project.logoUrl}
                   alt={`Logo ${project.title}`}
                   className="w-full h-full object-contain drop-shadow"
@@ -228,6 +230,8 @@ function ModalContent({
                     {/* Image */}
                     <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
                       <img
+                        loading="lazy"
+                        decoding="async"
                         src={project.previewImage}
                         alt={`Interface ${project.title}`}
                         className="w-full h-full object-cover object-top"
@@ -253,6 +257,8 @@ function ModalContent({
 
                     <div className="absolute inset-0 pt-7 pb-4 px-1">
                       <img
+                        loading="lazy"
+                        decoding="async"
                         src={project.previewImage}
                         alt={`Interface ${project.title}`}
                         className="w-full h-full object-cover object-top rounded-2xl"

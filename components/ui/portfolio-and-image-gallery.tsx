@@ -291,6 +291,10 @@ export const RadialScrollGallery = forwardRef<
                     }deg)`,
                   }}
                 >
+                  {/* 
+                    Using a generic div with role="button" instead of <button> 
+                    to allow passing interactive children (like <Link>) without creating invalid HTML nesting.
+                  */}
                   <div
                     role='button'
                     tabIndex={disabled ? -1 : 0}

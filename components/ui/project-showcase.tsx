@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState, useRef, useEffect } from "react";
+import { useCallback } from "react";
 import { 
   ArrowUpRight, 
   Sparkles, 
@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
+import { useCursorFollower } from "@/components/ui/useCursorFollower";
 
 export interface ShowcaseProject {
   id: string;
@@ -40,75 +41,30 @@ export function ProjectShowcase({
   projects = [],
   onSelectProject,
 }: ProjectShowcaseProps) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const lerp = (start: number, end: number, factor: number) => {
-      return start + (end - start) * factor;
-    };
-
-    const animate = () => {
-      setSmoothPosition((prev) => ({
-        x: lerp(prev.x, mousePosition.x, 0.15),
-        y: lerp(prev.y, mousePosition.y, 0.15),
-      }));
-      animationRef.current = requestAnimationFrame(animate);
-    };
-
-    animationRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, [mousePosition]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
-  };
-
-  const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-    setIsVisible(true);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-    setIsVisible(false);
-  };
+  const offset = useCallback(
+    (index: number) => ({
+      x: 30,
+      y: projects[index]?.originalProject?.previewLayout === "desktop" ? -170 : -230,
+    }),
+    [projects]
+  );
+  const { containerRef, floatRef, hoveredIndex, isVisible, onMouseMove, show, hide } =
+    useCursorFollower({ offset });
 
   return (
     <div
       ref={containerRef}
-      onMouseMove={handleMouseMove}
+      onMouseMove={onMouseMove}
       className="relative w-full mx-auto"
     >
       {/* Floating Mockup on Hover (Desktop Screen) */}
       <div
-        className="pointer-events-none fixed z-50 hidden lg:block overflow-hidden transition-all duration-300"
+        ref={floatRef}
+        className="pointer-events-none fixed left-0 top-0 z-50 hidden lg:block overflow-hidden will-change-transform"
         style={{
-          left: containerRef.current?.getBoundingClientRect().left ?? 0,
-          top: containerRef.current?.getBoundingClientRect().top ?? 0,
-          transform: `translate3d(${smoothPosition.x + 30}px, ${
-            hoveredIndex !== null && projects[hoveredIndex]?.originalProject?.previewLayout === "desktop"
-              ? smoothPosition.y - 170
-              : smoothPosition.y - 230
-          }px, 0)`,
           opacity: isVisible ? 1 : 0,
           scale: isVisible ? 1 : 0.85,
-          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), scale 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s ease-out",
+          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), scale 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
         {hoveredIndex !== null && projects[hoveredIndex]?.originalProject?.previewLayout === "desktop" ? (
@@ -145,6 +101,8 @@ export function ProjectShowcase({
               {/* Browser Screen Image */}
               <div className="relative flex-1 w-full h-[calc(100%-2rem)] overflow-hidden bg-slate-950">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={projects[hoveredIndex].image}
                   alt={projects[hoveredIndex].title}
                   className="w-full h-full object-cover object-top transition-transform duration-500"
@@ -207,6 +165,8 @@ export function ProjectShowcase({
                     {/* Phone Screen Wallpaper / UI */}
                     <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950 flex flex-col">
                       <img
+                        loading="lazy"
+                        decoding="async"
                         src={project.image || "/images/projects/nunya-mobile-real.png"}
                         alt={`Interface ${project.title}`}
                         className="w-full h-full object-cover object-top"
@@ -256,8 +216,8 @@ export function ProjectShowcase({
                 }
               }}
               className="group block cursor-pointer"
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => show(index)}
+              onMouseLeave={hide}
             >
               <div className="relative py-6 border-t border-white/[0.08] transition-all duration-300 ease-out">
                 {/* Background highlight on hover */}
@@ -276,6 +236,8 @@ export function ProjectShowcase({
                     {project.logo ? (
                       <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/10 p-1.5 flex items-center justify-center shrink-0 overflow-hidden group-hover:scale-105 group-hover:border-indigo-500/30 transition-all duration-300 shadow-md">
                         <img
+                          loading="lazy"
+                          decoding="async"
                           src={project.logo}
                           alt={`Logo ${project.title}`}
                           className="w-full h-full object-contain"
@@ -380,6 +342,8 @@ export function ProjectShowcase({
                         </div>
                         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
                           <img
+                            loading="lazy"
+                            decoding="async"
                             src={project.image}
                             alt={`Aperçu ${project.title}`}
                             className="w-full h-full object-cover object-top"
@@ -405,6 +369,8 @@ export function ProjectShowcase({
                         {/* Screen Image */}
                         <div className="absolute inset-0 pt-7 pb-4 px-1">
                           <img
+                            loading="lazy"
+                            decoding="async"
                             src={project.image || "/images/projects/nunya-mobile-real.png"}
                             alt={`Interface mobile ${project.title}`}
                             className="w-full h-full object-cover object-top rounded-xl"

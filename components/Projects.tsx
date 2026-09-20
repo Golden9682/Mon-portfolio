@@ -88,7 +88,7 @@ export function Projects() {
           />
 
           {/* Controls: View switcher & Filter Pills */}
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 min-w-0 max-w-full">
             
             {/* View Mode Toggle */}
             <div className="inline-flex p-1 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
@@ -121,7 +121,7 @@ export function Projects() {
             </div>
 
             {/* Filter Pills */}
-            <Reveal delay={0.2} className="shrink-0">
+            <Reveal delay={0.2} className="min-w-0 max-w-full">
               <LayoutGroup id="project-filters">
                 <div
                   role="tablist"
