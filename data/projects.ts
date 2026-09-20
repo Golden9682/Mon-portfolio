@@ -153,7 +153,7 @@ export const projectsData: Project[] = [
     tag: "Automatisation & IA",
     featured: true,
     period: "2023 – Présent",
-    previewImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+    previewImage: "/images/projects/bot-automation-workflow.jpg",
     description: "Système autonome de scraping d'appels à projets et de financements du web, extraction des données clés et livraison quotidienne résumée via Telegram et Email.",
     longDescription: "Développement d'un pipeline de données pour une organisation non gouvernementale : le bot scrape quotidiennement de multiples plateformes d'appels d'offres et opportunités de subventions, en extrait les critères d'éligibilité, dates limites et budgets avec un moteur d'IA, et génère des synthèses prêtes à l'action.",
     metrics: [
