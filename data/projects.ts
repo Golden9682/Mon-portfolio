@@ -116,7 +116,7 @@ export const projectsData: Project[] = [
     featured: true,
     period: "2024",
     logoUrl: "/images/projects/assistant-dg-icon.png",
-    previewImage: "/images/projects/assistant-dg-icon.png",
+    previewImage: "/images/projects/assistant-dg-workflow.jpg",
     description: "Solution intelligente d'assistance à la Direction Générale : transcription audio, génération & lecture PDF/Excel, planificateur de rappels et génération automatique de rapports.",
     longDescription: "Un outil sur-mesure créé pour décharger les dirigeants de tâches chronophages. Il permet de dicter des notes (transcription vocale), d'extraire automatiquement des données de documents PDF et Excel, et de générer des synthèses d'activité complètes et des alertes par e-mail en un clic.",
     metrics: [
