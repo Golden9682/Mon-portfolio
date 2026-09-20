@@ -158,9 +158,19 @@ export function Projects() {
                         {/* Header tag & Icon */}
                         <div className="flex items-start justify-between gap-3 mb-5">
                           <div className="flex items-center gap-3">
-                            <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/10 transition-transform duration-500 ease-out-expo group-hover:scale-110 group-hover:-rotate-3">
-                              <Icon className={cn("w-5 h-5", color)} />
-                            </div>
+                            {project.logoUrl ? (
+                              <div className="w-10 h-10 rounded-xl bg-white/[0.08] border border-white/10 p-1.5 flex items-center justify-center shrink-0 overflow-hidden shadow-inner transition-transform duration-500 ease-out-expo group-hover:scale-110 group-hover:-rotate-3">
+                                <img
+                                  src={project.logoUrl}
+                                  alt={`Logo ${project.title}`}
+                                  className="w-full h-full object-contain drop-shadow"
+                                />
+                              </div>
+                            ) : (
+                              <div className="p-2.5 rounded-xl bg-white/[0.05] border border-white/10 transition-transform duration-500 ease-out-expo group-hover:scale-110 group-hover:-rotate-3">
+                                <Icon className={cn("w-5 h-5", color)} />
+                              </div>
+                            )}
                             <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/10 text-slate-300">
                               {project.tag}
                             </span>

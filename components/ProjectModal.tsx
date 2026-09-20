@@ -128,9 +128,19 @@ function ModalContent({
           className="space-y-3 pr-10"
         >
           <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl bg-white/5 border border-white/10 shrink-0">
-              <Icon className={cn("w-6 h-6", color)} />
-            </div>
+            {project.logoUrl ? (
+              <div className="w-14 h-14 rounded-2xl bg-white/[0.08] border border-white/10 p-2 flex items-center justify-center shrink-0 overflow-hidden shadow-lg">
+                <img
+                  src={project.logoUrl}
+                  alt={`Logo ${project.title}`}
+                  className="w-full h-full object-contain drop-shadow"
+                />
+              </div>
+            ) : (
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 shrink-0">
+                <Icon className={cn("w-6 h-6", color)} />
+              </div>
+            )}
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-[11px] font-semibold px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">

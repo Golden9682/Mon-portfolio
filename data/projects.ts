@@ -20,6 +20,7 @@ export interface Project {
   gradient: string;
   accentColor: string;
   iconName: string;
+  logoUrl?: string;
 }
 
 export const projectsData: Project[] = [
@@ -31,6 +32,7 @@ export const projectsData: Project[] = [
     tag: "Projet Phare · EdTech & Fintech",
     featured: true,
     period: "2024 – Présent",
+    logoUrl: "/images/projects/nunya-logo.png",
     description: "Application mobile gamifiée pour les élèves togolais préparant le BEPC, BAC 1 et BAC 2 avec annales officielles, classements mensuels et paiements Mobile Money.",
     longDescription: "NUNYA a été conçu pour résoudre le défi d'accès aux ressources éducatives de qualité au Togo. L'application intègre un mode 100% hors-ligne indispensable pour les zones à faible connectivité, un système de récompenses financières mensuelles pour stimuler les meilleurs élèves, et une sécurité renforcée contre la triche.",
     metrics: [
@@ -104,12 +106,13 @@ export const projectsData: Project[] = [
   },
   {
     id: "rapido",
-    title: "RAPIDO",
-    subtitle: "Plateforme Multi-Service de Commande & Livraison",
+    title: "XRAPIDO",
+    subtitle: "Plateforme Multi-Service de Commande & Livraison Rapide",
     category: "mobile",
     tag: "Full-Stack & Logistique",
     featured: true,
     period: "2024",
+    logoUrl: "/images/projects/rapido-logo.png",
     description: "Écosystème complet de commande et livraison comprenant une application mobile pour les utilisateurs, un tableau de bord administrateur et un backend haute performance.",
     longDescription: "Architecture complète à 4 volets conçue pour gérer le cycle de vie complet d'une commande : catalogue en ligne, prise de commande client, assignation aux livreurs et supervision administrative en temps réel.",
     metrics: [
