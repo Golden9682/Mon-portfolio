@@ -3,6 +3,8 @@ export interface SkillCategory {
   title: string;
   icon: string;
   color: string;
+  badge: string;
+  imageUrl: string;
   description: string;
   skills: {
     name: string;
@@ -18,6 +20,8 @@ export const skillCategories: SkillCategory[] = [
     title: "Développement Mobile",
     icon: "Smartphone",
     color: "emerald",
+    badge: "React Native & Expo",
+    imageUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=800&auto=format&fit=crop",
     description: "Création d'applications mobiles cross-platform performantes et adaptées aux environnements à faible connectivité.",
     skills: [
       { name: "React Native", highlight: true },
@@ -34,6 +38,8 @@ export const skillCategories: SkillCategory[] = [
     title: "Backend & Base de Données",
     icon: "Server",
     color: "indigo",
+    badge: "Node.js & PostgreSQL",
+    imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
     description: "Conception d'APIs REST robustes, sécurisées et prêtes pour la mise en production.",
     skills: [
       { name: "Node.js (v20+ / v22)", highlight: true },
@@ -50,6 +56,8 @@ export const skillCategories: SkillCategory[] = [
     title: "Automatisation, Scraping & IA",
     icon: "Cpu",
     color: "amber",
+    badge: "Bots & Pipelines IA",
+    imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
     description: "Gain de temps et automatisation de flux de travail complexes pour les entreprises et les ONG.",
     skills: [
       { name: "Telegram Bots", highlight: true },
@@ -65,6 +73,8 @@ export const skillCategories: SkillCategory[] = [
     title: "Fintech & Mobile Money",
     icon: "CreditCard",
     color: "cyan",
+    badge: "FedaPay & T-Money/Flooz",
+    imageUrl: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&auto=format&fit=crop",
     description: "Intégration des moyens de paiement locaux africains et gestion des flux financiers.",
     skills: [
       { name: "FedaPay Integration", highlight: true },
@@ -79,6 +89,8 @@ export const skillCategories: SkillCategory[] = [
     title: "DevOps, Tests & Outils",
     icon: "Wrench",
     color: "violet",
+    badge: "Docker & CI/CD",
+    imageUrl: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?q=80&w=800&auto=format&fit=crop",
     description: "Déploiement continu, tests automatisés et monitoring en temps réel.",
     skills: [
       { name: "Docker", highlight: true },
@@ -94,6 +106,8 @@ export const skillCategories: SkillCategory[] = [
     title: "Communication & Gestion",
     icon: "MessageSquare",
     color: "rose",
+    badge: "Agilité & Stratégie",
+    imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800&auto=format&fit=crop",
     description: "Double compétence unique associant vision technique et stratégie de communication.",
     skills: [
       { name: "Licence Communication des Organisations", highlight: true },
