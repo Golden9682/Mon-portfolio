@@ -187,6 +187,26 @@ function ModalContent({
           transition={{ delay: 0.26, duration: 0.5, ease: EASE }}
           className="space-y-7"
         >
+          {/* Mobile UI Preview if available */}
+          {project.previewImage && (
+            <div className="rounded-2xl bg-black/40 border border-white/10 p-4 sm:p-6 flex flex-col items-center justify-center overflow-hidden">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mb-3">
+                Aperçu de l&apos;Interface
+              </span>
+              <div className="relative max-w-[260px] w-full h-[400px] bg-[#0c111d] rounded-[36px] p-2 border-[4px] border-slate-700/80 shadow-2xl overflow-hidden">
+                <div className="relative w-full h-full bg-[#090d16] rounded-[28px] overflow-hidden flex flex-col justify-between border border-white/10">
+                  <div className="absolute inset-0">
+                    <img
+                      src={project.previewImage}
+                      alt={`Interface ${project.title}`}
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Description */}
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-[0.15em] flex items-center gap-3">

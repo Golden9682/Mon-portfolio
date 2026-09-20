@@ -2,7 +2,15 @@
 
 import type React from "react";
 import { useState, useRef, useEffect } from "react";
-import { ArrowUpRight, Sparkles, ExternalLink, Smartphone, Bot, Briefcase, Truck, Utensils, Gamepad2 } from "lucide-react";
+import { 
+  ArrowUpRight, 
+  Sparkles, 
+  Wifi, 
+  Battery, 
+  Smartphone,
+  CheckCircle2,
+  ChevronRight
+} from "lucide-react";
 import { Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
 
@@ -13,10 +21,10 @@ export interface ShowcaseProject {
   description: string;
   year: string;
   category: string;
+  tag?: string;
   link?: string;
   image: string;
   logo?: string;
-  tag?: string;
   techStack?: string[];
   originalProject?: Project;
 }
@@ -28,89 +36,9 @@ interface ProjectShowcaseProps {
   subtitle?: string;
 }
 
-const defaultProjects: ShowcaseProject[] = [
-  {
-    id: "nunya",
-    title: "NUNYA",
-    subtitle: "EdTech Gamifiée & Offline-First",
-    description: "Application mobile pour préparer le BEPC, BAC 1 & 2 avec annales officielles et paiements Mobile Money (FedaPay).",
-    year: "2024",
-    category: "Mobile",
-    tag: "Projet Phare · EdTech & Fintech",
-    link: "#",
-    image: "/images/projects/nunya-badge.png",
-    logo: "/images/projects/nunya-logo.png",
-    techStack: ["React Native", "Expo", "Node.js", "PostgreSQL", "FedaPay"]
-  },
-  {
-    id: "rapido",
-    title: "XRAPIDO",
-    subtitle: "Logistique & Livraison Rapide",
-    description: "Plateforme multi-plateforme complète avec application mobile de commande, panel admin et backend de dispatch.",
-    year: "2024",
-    category: "Mobile & Web",
-    tag: "Full-Stack & Logistique",
-    link: "#",
-    image: "/images/projects/rapido-scooter.png",
-    logo: "/images/projects/rapido-logo.png",
-    techStack: ["React Native", "React.js", "Node.js", "Express", "REST API"]
-  },
-  {
-    id: "assistant-dg",
-    title: "Assistant DG",
-    subtitle: "Suite d'Automatisation de Direction",
-    description: "Solution intelligente d'assistance aux dirigeants : transcription audio, parsing PDF/Excel et scheduler de tâches.",
-    year: "2024",
-    category: "Automation",
-    tag: "Productivité & IA Entreprise",
-    link: "#",
-    image: "/images/projects/assistant-dg-icon.png",
-    logo: "/images/projects/assistant-dg-icon.png",
-    techStack: ["Python", "Flask", "Audio Transcription", "Excel Automation"]
-  },
-  {
-    id: "bots-automation",
-    title: "Bots IA & Scraping (N8N & Telegram)",
-    subtitle: "Pipelines de Veille pour ONG",
-    description: "Système autonome de veille d'opportunités d'appels d'offres avec extraction par IA et synthèses quotidiennes Telegram.",
-    year: "2023 - 2026",
-    category: "Automation",
-    tag: "Automatisation & IA",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
-    techStack: ["Python", "N8N", "Telegram API", "Web Scraping", "OpenAI"]
-  },
-  {
-    id: "food-et-cie",
-    title: "Food et Cie",
-    subtitle: "Plateforme Traiteur & Commande en Ligne",
-    description: "Site vitrine et système de commande interactif pour un service traiteur avec menu multi-cuisines, déployé sur Netlify.",
-    year: "2023",
-    category: "Web",
-    tag: "Web App & Production",
-    link: "https://food-et-cie.netlify.app",
-    image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
-    techStack: ["HTML5", "Modern JS", "Tailwind CSS", "Netlify"]
-  },
-  {
-    id: "zombie-shock",
-    title: "Zombie Shock & Game Lab",
-    subtitle: "Développement de Jeu Vidéo & Graphismes",
-    description: "Création d'actifs graphiques, logique de gameplay et mécaniques interactives pour jeux mobiles.",
-    year: "2023",
-    category: "Game Dev",
-    tag: "Game Art & Mobile",
-    link: "#",
-    image: "/images/projects/zombie-shock-preview.png",
-    techStack: ["Game Design", "React Native / 2D", "Sprite Assets"]
-  }
-];
-
 export function ProjectShowcase({
-  projects = defaultProjects,
+  projects = [],
   onSelectProject,
-  title = "Selected Work",
-  subtitle = "Survolez un projet pour afficher son aperçu visuel en direct"
 }: ProjectShowcaseProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -167,47 +95,85 @@ export function ProjectShowcase({
       onMouseMove={handleMouseMove}
       className="relative w-full mx-auto"
     >
-      {/* Floating Image Preview on Hover (Desktop) */}
+      {/* Floating Smartphone Mockup on Hover (Desktop) */}
       <div
-        className="pointer-events-none fixed z-50 hidden md:block overflow-hidden rounded-2xl shadow-2xl shadow-black/80 border border-white/20 bg-[#0d1322]"
+        className="pointer-events-none fixed z-50 hidden lg:block overflow-hidden transition-all duration-300"
         style={{
           left: containerRef.current?.getBoundingClientRect().left ?? 0,
           top: containerRef.current?.getBoundingClientRect().top ?? 0,
-          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 120}px, 0)`,
+          transform: `translate3d(${smoothPosition.x + 30}px, ${smoothPosition.y - 200}px, 0)`,
           opacity: isVisible ? 1 : 0,
           scale: isVisible ? 1 : 0.8,
-          transition: "opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), scale 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+          transition: "opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), scale 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        <div className="relative w-[340px] h-[220px] bg-slate-900/90 rounded-2xl overflow-hidden p-1">
-          {projects.map((project, index) => (
-            <div
-              key={project.id || project.title}
-              className="absolute inset-0 w-full h-full p-2 flex items-center justify-center transition-all duration-500 ease-out"
-              style={{
-                opacity: hoveredIndex === index ? 1 : 0,
-                transform: hoveredIndex === index ? "scale(1)" : "scale(1.1)",
-                filter: hoveredIndex === index ? "none" : "blur(12px)",
-              }}
-            >
-              <img
-                src={project.image || "/images/projects/nunya-logo.png"}
-                alt={project.title}
-                className="w-full h-full object-cover rounded-xl border border-white/10"
-              />
-              {/* Subtle gradient overlay & tag */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent rounded-xl flex items-end p-4">
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-300 bg-indigo-500/20 px-2 py-0.5 rounded border border-indigo-500/30">
-                    {project.category}
-                  </span>
-                  <div className="text-white text-xs font-bold mt-1">
-                    {project.title}
-                  </div>
-                </div>
+        {/* Realistic Smartphone Phone Frame */}
+        <div className="relative w-[240px] h-[460px] bg-[#0c111d] rounded-[42px] p-2.5 border-[5px] border-slate-700/80 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),0_0_30px_rgba(99,102,241,0.25)] ring-1 ring-white/20">
+          
+          {/* Inner Phone Bezel & Screen */}
+          <div className="relative w-full h-full bg-[#090d16] rounded-[34px] overflow-hidden flex flex-col justify-between border border-white/10">
+            
+            {/* Top Status Bar with Dynamic Island */}
+            <div className="relative z-20 pt-2 px-5 flex items-center justify-between text-[10px] text-white/80 font-medium">
+              <span>9:41</span>
+              
+              {/* Dynamic Island Pill */}
+              <div className="w-16 h-4 bg-black rounded-full flex items-center justify-end px-1.5 gap-1 border border-white/10 shadow-inner">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500/60" />
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <Wifi className="w-3 h-3" />
+                <Battery className="w-3.5 h-3.5" />
               </div>
             </div>
-          ))}
+
+            {/* Mobile Screen Contents */}
+            <div className="absolute inset-0 pt-8 pb-6 px-1.5 overflow-hidden">
+              {projects.map((project, index) => (
+                <div
+                  key={project.id || project.title}
+                  className="absolute inset-0 w-full h-full p-2 flex flex-col items-center justify-center transition-all duration-500 ease-out"
+                  style={{
+                    opacity: hoveredIndex === index ? 1 : 0,
+                    transform: hoveredIndex === index ? "scale(1) translateY(0)" : "scale(1.08) translateY(12px)",
+                    filter: hoveredIndex === index ? "none" : "blur(10px)",
+                  }}
+                >
+                  {/* Phone Screen Wallpaper / UI */}
+                  <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 shadow-inner bg-slate-950 flex flex-col">
+                    <img
+                      src={project.image || "/images/projects/nunya-mobile-leaderboard.png"}
+                      alt={`Interface ${project.title}`}
+                      className="w-full h-full object-cover object-top"
+                    />
+                    
+                    {/* Bottom floating badge inside mobile UI */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 pt-6 flex items-end justify-between">
+                      <div>
+                        <div className="text-[10px] font-mono text-indigo-300 font-semibold uppercase">
+                          {project.category}
+                        </div>
+                        <div className="text-white text-xs font-bold leading-tight mt-0.5">
+                          {project.title}
+                        </div>
+                      </div>
+                      <div className="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-[10px]">
+                        <ArrowUpRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Home Indicator Bar */}
+            <div className="relative z-20 pb-1.5 flex justify-center">
+              <div className="w-24 h-1 bg-white/40 rounded-full" />
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -243,7 +209,7 @@ export function ProjectShowcase({
                   <div className="flex items-start sm:items-center gap-4 flex-1 min-w-0">
                     {/* Project Logo or Icon */}
                     {project.logo ? (
-                      <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/10 p-1.5 flex items-center justify-center shrink-0 overflow-hidden group-hover:scale-105 group-hover:border-indigo-500/30 transition-all duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-white/[0.05] border border-white/10 p-1.5 flex items-center justify-center shrink-0 overflow-hidden group-hover:scale-105 group-hover:border-indigo-500/30 transition-all duration-300 shadow-md">
                         <img
                           src={project.logo}
                           alt={`Logo ${project.title}`}
@@ -252,7 +218,7 @@ export function ProjectShowcase({
                       </div>
                     ) : (
                       <div className="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                        <Sparkles className="w-5 h-5" />
+                        <Smartphone className="w-5 h-5" />
                       </div>
                     )}
 
@@ -272,7 +238,7 @@ export function ProjectShowcase({
                         </h3>
 
                         {project.tag && (
-                          <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 text-slate-400">
+                          <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300">
                             {project.tag}
                           </span>
                         )}
@@ -281,7 +247,7 @@ export function ProjectShowcase({
                       {/* Description with subtle color transition */}
                       <p
                         className={cn(
-                          "text-xs sm:text-sm mt-1 leading-relaxed transition-colors duration-300",
+                          "text-xs sm:text-sm mt-1.5 leading-relaxed transition-colors duration-300",
                           isHovered ? "text-slate-200" : "text-slate-400"
                         )}
                       >
@@ -294,7 +260,7 @@ export function ProjectShowcase({
                           {project.techStack.map((t) => (
                             <span
                               key={t}
-                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.02] border border-white/5 text-slate-400"
+                              className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.03] border border-white/5 text-slate-400"
                             >
                               {t}
                             </span>
@@ -304,7 +270,7 @@ export function ProjectShowcase({
                     </div>
                   </div>
 
-                  {/* Right: Year + Arrow CTA */}
+                  {/* Right: Year + Action CTA */}
                   <div className="flex items-center justify-between md:justify-end gap-3 shrink-0 pt-2 md:pt-0 border-t border-white/[0.04] md:border-0">
                     <span
                       className={cn(
@@ -330,16 +296,40 @@ export function ProjectShowcase({
 
                 </div>
 
-                {/* Mobile Thumbnail view (when hover is not possible) */}
-                <div className="block md:hidden mt-4 rounded-xl overflow-hidden border border-white/10 h-40 bg-black/40 relative">
-                  <img
-                    src={project.image || "/images/projects/nunya-logo.png"}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-3">
-                    <span className="text-xs text-white font-medium flex items-center gap-1">
-                      Toucher pour voir les détails <ArrowUpRight className="w-3.5 h-3.5" />
+                {/* Mobile / Tablet View: Phone Mockup Frame */}
+                <div className="block lg:hidden mt-5">
+                  <div className="relative mx-auto max-w-[240px] h-[400px] bg-[#0c111d] rounded-[36px] p-2 border-[4px] border-slate-700/80 shadow-xl overflow-hidden">
+                    <div className="relative w-full h-full bg-[#090d16] rounded-[28px] overflow-hidden flex flex-col justify-between border border-white/10">
+                      
+                      {/* Mini top notch */}
+                      <div className="relative z-10 pt-2 px-3 flex justify-between items-center text-[9px] text-white/70">
+                        <span>9:41</span>
+                        <div className="w-12 h-3 bg-black rounded-full" />
+                        <div className="flex items-center gap-1">
+                          <Wifi className="w-2.5 h-2.5" />
+                          <Battery className="w-2.5 h-2.5" />
+                        </div>
+                      </div>
+
+                      {/* Screen Image */}
+                      <div className="absolute inset-0 pt-7 pb-4 px-1">
+                        <img
+                          src={project.image || "/images/projects/nunya-mobile-leaderboard.png"}
+                          alt={`Interface mobile ${project.title}`}
+                          className="w-full h-full object-cover object-top rounded-xl"
+                        />
+                      </div>
+
+                      {/* Bottom indicator */}
+                      <div className="relative z-10 pb-1 flex justify-center">
+                        <div className="w-16 h-1 bg-white/40 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center mt-2.5">
+                    <span className="text-[11px] text-indigo-400 font-medium inline-flex items-center gap-1 hover:underline">
+                      Ouvrir l&apos;étude de cas complète <ChevronRight className="w-3 h-3" />
                     </span>
                   </div>
                 </div>
