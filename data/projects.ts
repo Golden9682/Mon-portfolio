@@ -214,33 +214,5 @@ export const projectsData: Project[] = [
     gradient: "from-orange-500/20 via-rose-500/10 to-transparent",
     accentColor: "#f97316",
     iconName: "Utensils"
-  },
-  {
-    id: "zombie-shock",
-    title: "Zombie Shock & Game Lab",
-    subtitle: "Développement de Jeu Vidéo & Création Graphique",
-    category: "mobile",
-    tag: "Mobile Game & Assets",
-    featured: false,
-    period: "2023",
-    previewImage: "/images/projects/zombie-shock-preview.png",
-    previewLayout: "mobile",
-    description: "Conception d'assets 2D, sprites, interfaces dynamiques et mécaniques de gameplay pour jeux vidéo et divertissement mobile.",
-    longDescription: "Projet d'exploration et de création dans le domaine du gaming mobile : design des personnages, environnement interactif, intégration d'effets visuels et optimisation des performances sur smartphone.",
-    highlights: [
-      "Création complète d'assets graphiques, personnages et décors de jeu.",
-      "Développement de mécaniques de jeu interactives et réactives.",
-      "Gestion de la physique 2D, des collisions et de l'audio."
-    ],
-    techStack: [
-      "Game Engine / 2D",
-      "JavaScript / TypeScript",
-      "Sprite Design",
-      "Mobile Performance"
-    ],
-    links: {},
-    gradient: "from-rose-500/20 via-red-500/10 to-transparent",
-    accentColor: "#f43f5e",
-    iconName: "Smartphone"
   }
 ];
