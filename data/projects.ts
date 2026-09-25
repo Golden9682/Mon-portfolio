@@ -3,6 +3,7 @@ export interface Project {
   title: string;
   subtitle: string;
   category: "mobile" | "backend" | "automation" | "web" | "all";
+  categories?: ("mobile" | "backend" | "automation" | "web")[];
   tag: string;
   featured: boolean;
   period: string;
@@ -84,13 +85,18 @@ export const projectsData: Project[] = [
     id: "rapido",
     title: "XRapido",
     subtitle: "Plateforme de Mobilité, Transport & Livraison au Togo (XRapido S.A.R.L.U.)",
-    category: "mobile",
+    category: "web",
+    categories: ["web", "mobile"],
     tag: "Client Réel · Production en Ligne",
     featured: true,
     period: "2024 – En Ligne",
     logoUrl: "/images/projects/rapido-logo.png",
-    previewImage: "/images/projects/rapido-mobile-real.png",
-    previewLayout: "mobile",
+    previewImage: "/images/projects/xrapido-wide.jpg",
+    screenshots: [
+      "/images/projects/xrapido-wide.jpg",
+      "/images/projects/rapido-mobile-real.png"
+    ],
+    previewLayout: "desktop",
     description: "Conception, développement et mise en ligne de la plateforme officielle et de l'écosystème de transport & livraison pour XRAPIDO S.A.R.L.U. au Togo (mise en relation client-chauffeur, estimation P2P et paiements locaux).",
     longDescription: "XRapido est une solution complète de mobilité et logistique développée pour le marché togolais. La plateforme comprend le site officiel en production (xrapidoexpress.com), une application mobile client pour commander courses et livraisons (moto, tricycle, voiture) avec négociation tarifaire P2P en temps réel, une application chauffeur avec suivi GPS et encaissement sécurisé, et un back-office d'administration avec contrôle KYC.",
     metrics: [
@@ -108,9 +114,9 @@ export const projectsData: Project[] = [
       "Back-office d'administration pour la validation pièce par pièce des dossiers prestataires, la gestion des demandes de retrait et le suivi comptable."
     ],
     techStack: [
+      "React.js / Next.js",
       "React Native",
       "Expo",
-      "React.js / Next.js",
       "Node.js",
       "Express",
       "PostgreSQL",

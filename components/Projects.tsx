@@ -53,7 +53,11 @@ export function Projects() {
   const filteredProjects =
     selectedCategory === "all"
       ? projectsData
-      : projectsData.filter((p) => p.category === selectedCategory);
+      : projectsData.filter(
+          (p) =>
+            p.category === selectedCategory ||
+            (p.categories && p.categories.includes(selectedCategory as any))
+        );
 
   // Convert to ShowcaseProject format
   const showcaseProjects: ShowcaseProject[] = filteredProjects.map((p) => ({

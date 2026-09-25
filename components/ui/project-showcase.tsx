@@ -114,8 +114,8 @@ export function ProjectShowcase({
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   <span className="text-slate-400">https://</span>
                   <span className="text-indigo-300 font-semibold">
-                    {projects[hoveredIndex].id === "food-et-cie"
-                      ? "food-et-cie.netlify.app"
+                    {projects[hoveredIndex].link && projects[hoveredIndex].link !== "#"
+                      ? projects[hoveredIndex].link.replace(/^https?:\/\//, "").replace(/\/$/, "")
                       : projects[hoveredIndex].id === "assistant-dg"
                       ? "assistant-dg.enterprise/workflow"
                       : "bot-pipeline.ai/telegram-engine"}
