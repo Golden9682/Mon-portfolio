@@ -40,12 +40,12 @@ export const experiencesData: ExperienceItem[] = [
     location: "Remote",
     period: "2022 – Présent",
     description: "Développement d'applications web/mobile et automatisation des processus métier pour des entreprises et des ONG.",
-    badges: ["Automation", "Telegram Bots", "Web Scraping", "N8N", "Next.js / Web"],
+    badges: ["XRapido Express", "React Native", "FedaPay", "N8N", "Telegram Bots", "Next.js"],
     bulletPoints: [
-      "Création de sites web et applications sur-mesure (ex. Food et Cie — plateforme traiteur avec menu interactif et commande en ligne).",
-      "Développement d'un bot Telegram de scraping d'appels à projets et opportunités de subventions pour une ONG, avec extraction IA et résumés quotidiens.",
-      "Automatisation de pipelines de données d'entreprises, systèmes de notification instantanée et flux d'e-mails.",
-      "Conseil digital et automatisation de contenus pour PME et créateurs."
+      "Développement et déploiement de la plateforme de transport et livraison XRapido (xrapidoexpress.com) : applications mobiles client/chauffeur, suivi GPS en direct et intégration de FedaPay (YAS & Flooz).",
+      "Création d'applications web interactives (ex. Food et Cie — plateforme traiteur avec menu interactif et commande en ligne).",
+      "Développement d'un pipeline de scraping d'appels à projets et opportunités de subventions pour une ONG, avec extraction IA et alertes Telegram quotidiennes.",
+      "Automatisation de processus métier de direction (Assistant DG) et intégration de flux automatisés (N8N, e-mails, PDF/Excel)."
     ]
   },
   {

@@ -82,38 +82,46 @@ export const projectsData: Project[] = [
   },
   {
     id: "rapido",
-    title: "XRAPIDO",
-    subtitle: "Plateforme Multi-Service de Commande & Livraison Rapide",
+    title: "XRapido",
+    subtitle: "Plateforme de Mobilité, Transport & Livraison au Togo (XRapido S.A.R.L.U.)",
     category: "mobile",
-    tag: "Full-Stack & Logistique",
+    tag: "Client Réel · Production en Ligne",
     featured: true,
-    period: "2024",
+    period: "2024 – En Ligne",
     logoUrl: "/images/projects/rapido-logo.png",
     previewImage: "/images/projects/rapido-mobile-real.png",
     previewLayout: "mobile",
-    description: "Écosystème complet de commande et livraison comprenant une application mobile pour les utilisateurs, un tableau de bord administrateur et un backend haute performance.",
-    longDescription: "Architecture complète à 4 volets conçue pour gérer le cycle de vie complet d'une commande : catalogue en ligne, prise de commande client, assignation aux livreurs et supervision administrative en temps réel.",
+    description: "Conception, développement et mise en ligne de la plateforme officielle et de l'écosystème de transport & livraison pour XRAPIDO S.A.R.L.U. au Togo (mise en relation client-chauffeur, estimation P2P et paiements locaux).",
+    longDescription: "XRapido est une solution complète de mobilité et logistique développée pour le marché togolais. La plateforme comprend le site officiel en production (xrapidoexpress.com), une application mobile client pour commander courses et livraisons (moto, tricycle, voiture) avec négociation tarifaire P2P en temps réel, une application chauffeur avec suivi GPS et encaissement sécurisé, et un back-office d'administration avec contrôle KYC.",
     metrics: [
-      { label: "Architecture", value: "4 Modules complets" },
-      { label: "Temps réel", value: "Gestion des flux de livraison" },
-      { label: "Backend", value: "API REST sécurisée" }
+      { label: "Site en Direct", value: "xrapidoexpress.com" },
+      { label: "Paiements", value: "FedaPay (YAS & Flooz USSD)" },
+      { label: "Sécurité", value: "Vérification KYC & Suivi GPS" },
+      { label: "Écosystème", value: "3 Volets (Client, Chauffeur, Admin)" }
     ],
     highlights: [
-      "Application mobile utilisateur fluide pour la navigation dans les catalogues et le passage de commande.",
-      "Panneau d'administration web dédié à la gestion des commandes, des livreurs et des statistiques.",
-      "Backend REST centralisé pour la synchronisation en direct des statuts de livraison.",
-      "Frontend web moderne et responsive pour les commandes en ligne directes."
+      "Création, intégration et mise en ligne du site officiel et de la plateforme https://www.xrapidoexpress.com/ pour XRAPIDO S.A.R.L.U.",
+      "Écosystème unifié pour le transport de personnes et la livraison de colis (motos, tricycles et voitures) au Togo.",
+      "Système de négociation tarifaire P2P en temps réel entre clients et prestataires avec calcul de commission automatique (10%).",
+      "Intégration des paiements mobiles locaux sécurisés via la passerelle FedaPay (YAS / T-Money et Moov Flooz en USSD) et gestion des retraits de gains.",
+      "Module de sécurité avancé : vérification d'identité KYC par caméra avant validation de profil, suivi d'itinéraire GPS en direct et bouton d'alerte d'urgence.",
+      "Back-office d'administration pour la validation pièce par pièce des dossiers prestataires, la gestion des demandes de retrait et le suivi comptable."
     ],
     techStack: [
       "React Native",
-      "React.js",
+      "Expo",
+      "React.js / Next.js",
       "Node.js",
       "Express",
       "PostgreSQL",
+      "FedaPay (YAS / Flooz)",
+      "GPS & Mapping",
       "Tailwind CSS",
       "REST API"
     ],
-    links: {},
+    links: {
+      live: "https://www.xrapidoexpress.com/",
+    },
     gradient: "from-cyan-500/20 via-sky-500/10 to-transparent",
     accentColor: "#06b6d4",
     iconName: "Truck"
