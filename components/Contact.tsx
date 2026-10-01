@@ -44,7 +44,7 @@ export function Contact() {
     setFormData({ ...formData, [key]: e.target.value });
 
   return (
-    <section id="contact" className="relative py-24 md:py-32">
+    <section id="contact" data-theme-section="nuit" className="relative py-24 md:py-32">
       <div className="frame">
         <SectionHeader
           eyebrow="Collaboration & opportunités"

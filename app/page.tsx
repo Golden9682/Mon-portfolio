@@ -9,10 +9,12 @@ import { Experience } from "@/components/Experience";
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { ScrollEngine } from "@/components/ui/ScrollEngine";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col">
+      <ScrollEngine />
       <Navbar />
       <Hero />
       <Services />

@@ -74,7 +74,6 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      data-theme="atelier"
       className={`${display.variable} ${text.variable} ${mono.variable} ${accent.variable}`}
       suppressHydrationWarning
     >

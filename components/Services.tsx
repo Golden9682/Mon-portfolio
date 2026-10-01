@@ -42,7 +42,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="relative py-24 md:py-32">
+    <section id="services" data-theme-section="atelier" className="relative py-24 md:py-32">
       <div className="frame">
         <SectionHeader
           eyebrow="Ce que je fais"

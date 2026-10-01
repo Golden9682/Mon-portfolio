@@ -11,10 +11,9 @@
                tout le site, jamais plus) · JetBrains Mono (chiffres, labels :
                une voix utilitaire, pas un ornement).
 
-   Couleur     Un seul accent : orange brique #E2572B.
-               Attention : sur le thème « papier » son contraste tombe à 3,1:1 —
-               réservé aux gros titres et aux éléments non textuels, jamais au
-               corps de texte.
+   Couleur     Un seul accent : orange brique #E2572B. Sur le thème « papier »,
+               il passe à #B3431E (même teinte, plus sombre) : #E2572B n'y
+               donnait que 3,1:1, #B3431E donne 4,7:1.
 
    Thèmes      atelier (sombre) → papier (clair) → nuit (plus sombre).
                La bascule sombre → clair → sombre porte le rythme vertical.
@@ -26,7 +25,23 @@
 
 /* --------------------------------------------------------------------------
    Tokens
+   Les couleurs sont déclarées avec @property : ce sont les variables
+   elles-mêmes qui s'interpolent quand le thème change au scroll, donc tout
+   ce qui les utilise glisse d'un thème à l'autre en même temps (fond, texte,
+   filets), sans transition à poser élément par élément.
    -------------------------------------------------------------------------- */
+@property --bg { syntax: "<color>"; inherits: true; initial-value: #0b0b0c; }
+@property --bg-raise { syntax: "<color>"; inherits: true; initial-value: #141416; }
+@property --fg { syntax: "<color>"; inherits: true; initial-value: #f2efe9; }
+@property --fg-muted { syntax: "<color>"; inherits: true; initial-value: #9b958c; }
+@property --fg-faint { syntax: "<color>"; inherits: true; initial-value: #827c74; }
+@property --line { syntax: "<color>"; inherits: true; initial-value: rgba(242, 239, 233, 0.12); }
+@property --line-strong { syntax: "<color>"; inherits: true; initial-value: rgba(242, 239, 233, 0.22); }
+@property --surface { syntax: "<color>"; inherits: true; initial-value: rgba(242, 239, 233, 0.035); }
+@property --surface-raise { syntax: "<color>"; inherits: true; initial-value: rgba(242, 239, 233, 0.06); }
+@property --accent { syntax: "<color>"; inherits: true; initial-value: #e2572b; }
+@property --on-accent { syntax: "<color>"; inherits: true; initial-value: #0b0b0c; }
+
 :root {
   /* Thème par défaut : atelier */
   --bg: #0b0b0c;
@@ -57,8 +72,13 @@
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  --theme-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  transition: --bg 0.7s var(--theme-ease), --bg-raise 0.7s var(--theme-ease),
+    --fg 0.7s var(--theme-ease), --fg-muted 0.7s var(--theme-ease),
+    --fg-faint 0.7s var(--theme-ease), --line 0.7s var(--theme-ease),
+    --line-strong 0.7s var(--theme-ease), --surface 0.7s var(--theme-ease),
+    --surface-raise 0.7s var(--theme-ease), --accent 0.7s var(--theme-ease),
+    --on-accent 0.7s var(--theme-ease);
 }
 
 :root[data-theme="papier"] {
@@ -71,8 +91,9 @@
   --line-strong: rgba(21, 17, 14, 0.26);
   --surface: rgba(21, 17, 14, 0.04);
   --surface-raise: rgba(21, 17, 14, 0.07);
-  --accent-soft: rgba(226, 87, 43, 0.12);
-  --accent-line: rgba(226, 87, 43, 0.45);
+  --accent: #b3431e; /* 4,7:1 sur --bg ; texte blanc dessus : 5,5:1 */
+  --accent-soft: rgba(179, 67, 30, 0.12);
+  --accent-line: rgba(179, 67, 30, 0.45);
   --on-accent: #fdfcfa;
 }
 
@@ -97,14 +118,28 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Lenis (défilement à inertie) — styles requis par la librairie.
+   Sans Lenis (JS absent, mouvement réduit), le défilement natif reste. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 body {
   background-color: var(--bg);
   color: var(--fg);
   font-family: var(--font-text), ui-sans-serif, system-ui, sans-serif;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
-  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ::selection {

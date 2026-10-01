@@ -69,7 +69,9 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-[padding,background-color,border-color,box-shadow] duration-500 ease-out-expo",
+        // Pas de transition sur le fond : il suit déjà les couleurs du thème, qui
+        // s'animent seules. Une seconde transition le mettait en retard sur le texte.
+        "fixed top-0 left-0 right-0 z-50 transition-[padding] duration-500 ease-out-expo",
         scrolled || mobileMenuOpen
           ? "bg-bg border-b border-line py-3"
           : "bg-transparent border-b border-transparent py-5"

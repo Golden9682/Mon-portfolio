@@ -57,7 +57,7 @@ function Phone({
 
 export function Hero() {
   return (
-    <section id="hero" className="relative overflow-hidden mesh-atelier">
+    <section id="hero" data-theme-section="atelier" className="relative overflow-hidden mesh-atelier">
       <ParallaxScope className="relative">
         <div className="relative frame pt-36 pb-20 md:pt-44 md:pb-28">
           {/* Statut — une ligne de données, pas une pilule */}

@@ -32,7 +32,7 @@ const interests = [
 
 export function About() {
   return (
-    <section id="a-propos" className="relative py-24 md:py-32">
+    <section id="a-propos" data-theme-section="papier" className="relative py-24 md:py-32">
       <div className="frame">
         <SectionHeader
           eyebrow="Profil & philosophie"

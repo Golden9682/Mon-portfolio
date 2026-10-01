@@ -11,7 +11,7 @@ import { Reveal } from "@/components/ui/motion";
  */
 export function Experience() {
   return (
-    <section id="parcours" className="relative py-24 md:py-32">
+    <section id="parcours" data-theme-section="papier" className="relative py-24 md:py-32">
       <div className="frame">
         <SectionHeader
           eyebrow="Expériences & formation"

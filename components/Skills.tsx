@@ -13,7 +13,7 @@ import { Reveal } from "@/components/ui/motion";
  */
 export function Skills() {
   return (
-    <section id="competences" className="relative py-24 md:py-32">
+    <section id="competences" data-theme-section="papier" className="relative py-24 md:py-32">
       <div className="frame">
         <SectionHeader
           eyebrow="Stack & savoir-faire"

@@ -1,7 +1,7 @@
 # Refonte MOTION-CRAFT — portfolio Kokou Komna Abdoul Raouf
 
 > Spec rédigée avant tout code, conformément à `~/.claude/MOTION-CRAFT.md` §1 et §9.
-> Statut : voix validée. Audit passe 2 traité (voir §7). Reste : thèmes au scroll et Lenis (3.6).
+> Statut : voix validée. Audit passe 2 traité (voir §7). Étape 3 terminée (3.6 inclus).
 
 ## Objectif
 
@@ -115,7 +115,13 @@ correction, nouvelle capture. Une section à la fois (§6).
 - [x] **3.4** **Corriger le `opacity:0` sans JS** — vérifié par capture `--disable-javascript` :
       la page est entièrement lisible sans JS
 - [x] **3.5** Hero : titre à 12vw, mise en page asymétrique, nouveaux libellés
-- [ ] **3.6** Lenis + bascule de thème au scroll
+- [x] **3.6** Lenis + bascule de thème au scroll (`components/ui/ScrollEngine.tsx`).
+      Lenis : lerp 0.1, molette seulement (tactile natif), désactivé en mouvement réduit,
+      en pause quand une modale ou le menu verrouille la page, ancres alignées sur le
+      `scroll-padding-top` (88 px). Thèmes : atelier (hero, services) → nuit (projets) →
+      papier (respiration, compétences, parcours, à propos) → nuit (contact). Couleurs en
+      `@property` : la page entière glisse en 0,7 s. Accent papier `#B3431E` (4,7:1).
+      Lenis et GSAP chargés après le premier rendu : JS initial inchangé (166 kB).
 - [x] **3.7** Retrait des anti-patterns : glassmorphism (navbar comprise), halo au curseur,
       titre en dégradé, grille de fond, orbes (hero, Contact, Footer), pilules, ✨ Sparkles,
       flèches animées, cartes égales, confettis
@@ -221,6 +227,5 @@ Mesures (build de prod, cache vide) :
 Reste ouvert :
 - Phrases de résultat réelles par projet (à fournir).
 - Capture des bots : c'est un schéma, pas une capture du bot en fonctionnement.
-- Thèmes papier / nuit et Lenis (étape 3.6) non commencés.
 - Mentions légales absentes du pied de page (checklist CLAUDE.md §8).
 - LCP mobile à la limite : alléger les polices (4 fichiers, chargés jusqu'à 3,9 s en 4G lente).

@@ -191,7 +191,7 @@ export function Projects() {
         );
 
   return (
-    <section id="projets" className="relative py-24 md:py-32">
+    <section id="projets" data-theme-section="nuit" className="relative py-24 md:py-32">
       <div className="frame">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-12 lg:mb-16">
           <SectionHeader

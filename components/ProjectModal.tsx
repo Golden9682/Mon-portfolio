@@ -65,6 +65,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
           onClick={onClose}
+          data-lenis-prevent
           className="fixed inset-0 z-[60] flex items-start sm:items-center justify-center p-3 sm:p-6 md:p-8 bg-bg/70 backdrop-blur-md overflow-y-auto"
         >
           <m.div
