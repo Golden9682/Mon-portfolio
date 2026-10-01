@@ -74,10 +74,9 @@ export const projectsData: Project[] = [
       "Playwright",
       "Zustand"
     ],
-    links: {
-      github: "https://github.com",
-    },
-    gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
+    // À REMPLIR : l'adresse du vrai dépôt. L'ancien lien menait à la page d'accueil de github.com.
+    links: {},
+    gradient: "from-accent-soft via-transparent to-transparent",
     accentColor: "#10b981",
     iconName: "Smartphone"
   },
@@ -98,7 +97,7 @@ export const projectsData: Project[] = [
     ],
     previewLayout: "desktop",
     description: "Conception, développement et mise en ligne de la plateforme officielle et de l'écosystème de transport & livraison pour XRAPIDO S.A.R.L.U. au Togo (mise en relation client-chauffeur, estimation P2P et paiements locaux).",
-    longDescription: "XRapido est une solution complète de mobilité et logistique développée pour le marché togolais. La plateforme comprend le site officiel en production (xrapidoexpress.com), une application mobile client pour commander courses et livraisons (moto, tricycle, voiture) avec négociation tarifaire P2P en temps réel, une application chauffeur avec suivi GPS et encaissement sécurisé, et un back-office d'administration avec contrôle KYC.",
+    longDescription: "XRapido est un écosystème complet de mobilité et logistique développée pour le marché togolais. La plateforme comprend le site officiel en production (xrapidoexpress.com), une application mobile client pour commander courses et livraisons (moto, tricycle, voiture) avec négociation tarifaire P2P en temps réel, une application chauffeur avec suivi GPS et encaissement sécurisé, et un back-office d'administration avec contrôle KYC.",
     metrics: [
       { label: "Site en Direct", value: "xrapidoexpress.com" },
       { label: "Paiements", value: "FedaPay (YAS & Flooz USSD)" },
@@ -128,7 +127,7 @@ export const projectsData: Project[] = [
     links: {
       live: "https://www.xrapidoexpress.com/",
     },
-    gradient: "from-cyan-500/20 via-sky-500/10 to-transparent",
+    gradient: "from-accent-soft via-transparent to-transparent",
     accentColor: "#06b6d4",
     iconName: "Truck"
   },
@@ -148,7 +147,7 @@ export const projectsData: Project[] = [
       "/images/projects/assistant-dg-chat.jpg",
       "/images/projects/assistant-dg-tasks.jpg",
     ],
-    description: "Solution intelligente d'assistance à la Direction Générale : transcription audio, génération & lecture PDF/Excel, planificateur de rappels et génération automatique de rapports.",
+    description: "Assistant de la Direction Générale : transcription audio, génération & lecture PDF/Excel, planificateur de rappels et génération automatique de rapports.",
     longDescription: "Un outil sur-mesure créé pour décharger les dirigeants de tâches chronophages. Il permet de dicter des notes (transcription vocale), d'extraire automatiquement des données de documents PDF et Excel, et de générer des synthèses d'activité complètes et des alertes par e-mail en un clic.",
     metrics: [
       { label: "Automatisation", value: "100% Autonome" },
@@ -172,7 +171,7 @@ export const projectsData: Project[] = [
       "Email Automation"
     ],
     links: {},
-    gradient: "from-indigo-500/20 via-blue-500/10 to-transparent",
+    gradient: "from-accent-soft via-transparent to-transparent",
     accentColor: "#6366f1",
     iconName: "Briefcase"
   },
@@ -208,7 +207,7 @@ export const projectsData: Project[] = [
       "Email Automation"
     ],
     links: {},
-    gradient: "from-amber-500/20 via-yellow-500/10 to-transparent",
+    gradient: "from-accent-soft via-transparent to-transparent",
     accentColor: "#f59e0b",
     iconName: "Bot"
   },
@@ -239,7 +238,7 @@ export const projectsData: Project[] = [
     links: {
       live: "https://food-et-cie.netlify.app",
     },
-    gradient: "from-orange-500/20 via-rose-500/10 to-transparent",
+    gradient: "from-accent-soft via-transparent to-transparent",
     accentColor: "#f97316",
     iconName: "Utensils"
   }

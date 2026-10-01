@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { LazyMotion, domAnimation, m, useReducedMotion, type Variants } from "framer-motion";
 
 /**
@@ -8,6 +8,11 @@ import { LazyMotion, domAnimation, m, useReducedMotion, type Variants } from "fr
  * Every animated element in the app must use `m.*` instead of `motion.*`.
  */
 export function MotionProvider({ children }: { children: React.ReactNode }) {
+  // Signale au filet de sécurité (app/layout.tsx) que les animations JS sont prêtes.
+  useEffect(() => {
+    document.documentElement.setAttribute("data-motion-ready", "");
+  }, []);
+
   return (
     <LazyMotion features={domAnimation} strict>
       {children}
@@ -80,6 +85,7 @@ export function Reveal({
 
   return (
     <Tag
+      data-reveal=""
       className={className}
       style={style}
       initial="hidden"
@@ -154,7 +160,7 @@ export function StaggerItem({ children, direction = "up", className, as = "div",
   }
 
   return (
-    <Tag className={className} style={style} variants={revealVariants(direction)}>
+    <Tag data-reveal="" className={className} style={style} variants={revealVariants(direction)}>
       {children}
     </Tag>
   );

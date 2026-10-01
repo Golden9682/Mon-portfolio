@@ -37,15 +37,22 @@ export function Navbar() {
       .map((l) => document.querySelector<HTMLElement>(l.href))
       .filter((el): el is HTMLElement => el !== null);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(`#${visible.target.id}`);
-      },
-      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.2, 0.5] }
-    );
+    // L'observateur sert de déclencheur ; la section active est relue à chaque
+    // fois (celle qui passe sous la ligne de lecture, à 45 % de la hauteur).
+    // Se fier aux seules entrées reçues laissait un mauvais lien actif après
+    // un saut de défilement (lien d'ancre, touche Début).
+    const pick = () => {
+      const y = window.innerHeight * 0.45;
+      // Sections hors menu (Services, la respiration) : on garde la dernière
+      // section du menu commencée au-dessus de la ligne.
+      const above = sections.filter((s) => s.getBoundingClientRect().top <= y);
+      const hit = above[above.length - 1] ?? sections[0];
+      if (hit) setActive(`#${hit.id}`);
+    };
+    const observer = new IntersectionObserver(pick, {
+      rootMargin: "-40% 0px -50% 0px",
+      threshold: [0, 0.2, 0.5],
+    });
 
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
@@ -64,7 +71,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-[padding,background-color,border-color,box-shadow] duration-500 ease-out-expo",
         scrolled || mobileMenuOpen
-          ? "bg-[#090d16]/80 backdrop-blur-xl border-b border-white/[0.06] py-3 shadow-lg shadow-black/30"
+          ? "bg-bg border-b border-line py-3"
           : "bg-transparent border-b border-transparent py-5"
       )}
     >
@@ -72,29 +79,28 @@ export function Navbar() {
       <m.div
         aria-hidden
         style={{ scaleX: progress }}
-        className="absolute top-0 left-0 right-0 h-[2px] origin-left bg-gradient-to-r from-indigo-500 via-cyan-400 to-emerald-400"
+        className="absolute top-0 left-0 right-0 h-[2px] origin-left bg-accent"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="frame flex items-center justify-between">
         {/* Logo */}
         <a
           href="#hero"
-          className="flex items-center gap-2.5 text-white font-bold tracking-tight text-lg group"
+          className="flex items-center gap-2.5 text-ink font-bold tracking-tight text-lg group"
           aria-label="Retour à l'accueil"
         >
-          <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/30 transition-transform duration-500 ease-out-expo group-hover:scale-105 group-hover:rotate-[-6deg]">
+          <div className="relative w-9 h-9 bg-accent flex items-center justify-center text-on-accent transition-colors duration-300 group-hover:bg-ink">
             <Terminal className="w-[18px] h-[18px]" />
-            <span className="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/20" />
-          </div>
+                      </div>
           <span className="font-mono text-sm sm:text-base">
-            Kokou<span className="text-indigo-400">.dev</span>
+            Kokou<span className="text-accent">.dev</span>
           </span>
         </a>
 
         {/* Desktop Nav */}
         <nav
           aria-label="Navigation principale"
-          className="hidden md:flex items-center gap-0.5 bg-white/[0.03] border border-white/[0.08] rounded-full p-1 backdrop-blur-md"
+          className="hidden lg:flex items-center"
         >
           {navLinks.map((link) => {
             const isActive = active === link.href;
@@ -104,14 +110,14 @@ export function Navbar() {
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "relative text-sm font-medium px-3.5 py-1.5 rounded-full transition-colors duration-300",
-                  isActive ? "text-white" : "text-slate-400 hover:text-white"
+                  "relative text-label px-4 py-2 transition-colors duration-300",
+                  isActive ? "text-ink" : "text-muted hover:text-ink"
                 )}
               >
                 {isActive && (
                   <m.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-white/[0.08] ring-1 ring-inset ring-white/10"
+                    className="absolute inset-x-3 -bottom-px h-px bg-accent"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   />
                 )}
@@ -122,17 +128,23 @@ export function Navbar() {
         </nav>
 
         {/* CTA Actions */}
-        <div className="hidden sm:flex items-center gap-3">
-          <a href="#contact" className="btn btn-primary text-xs px-4 py-2 rounded-lg group">
-            Me contacter
-            <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        <div className="hidden sm:flex items-center gap-3 ml-auto mr-3 lg:ml-0 lg:mr-0">
+          {/* Un seul bouton plein à l'écran : le hero et le formulaire de contact ont déjà le leur. */}
+          <a
+            href="#contact"
+            className={cn(
+              "btn !min-h-0 py-2.5",
+              active === "#hero" || active === "#contact" ? "btn-secondary" : "btn-primary"
+            )}
+          >
+            Écris-moi
           </a>
         </div>
 
         {/* Mobile menu button */}
         <button
           onClick={() => setMobileMenuOpen((v) => !v)}
-          className="md:hidden relative p-2 rounded-lg bg-white/5 border border-white/10 text-slate-300 hover:text-white transition-colors"
+          className="lg:hidden relative p-2 bg-surface border border-line text-muted hover:text-ink transition-colors"
           aria-label={mobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={mobileMenuOpen}
         >
@@ -145,7 +157,7 @@ export function Navbar() {
               transition={{ duration: 0.2 }}
               className="block"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-white" />}
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 text-ink" />}
             </m.span>
           </AnimatePresence>
         </button>
@@ -160,9 +172,9 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden overflow-hidden"
+            className="lg:hidden overflow-hidden"
           >
-            <div className="px-4 pt-4 pb-6 space-y-1 border-t border-white/[0.06] mt-3">
+            <div className="px-4 pt-4 pb-6 space-y-1 border-t border-line mt-3">
               {navLinks.map((link, i) => (
                 <m.a
                   key={link.name}
@@ -172,17 +184,17 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 + i * 0.04, duration: 0.3 }}
                   className={cn(
-                    "flex items-center justify-between text-base font-medium px-3 py-3 rounded-xl transition-colors",
+                    "flex items-center justify-between text-base font-medium px-3 py-3 transition-colors",
                     active === link.href
-                      ? "text-white bg-white/[0.06]"
-                      : "text-slate-300 hover:text-white hover:bg-white/5"
+                      ? "text-ink bg-surface-raise"
+                      : "text-muted hover:text-ink hover:bg-surface"
                   )}
                 >
                   {link.name}
                   <span
                     className={cn(
-                      "w-1.5 h-1.5 rounded-full transition-colors",
-                      active === link.href ? "bg-indigo-400" : "bg-transparent"
+                      "w-1.5 h-1.5 transition-colors",
+                      active === link.href ? "bg-accent" : "bg-transparent"
                     )}
                   />
                 </m.a>
@@ -196,9 +208,9 @@ export function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn btn-primary w-full text-sm px-4 py-3"
+                  className="btn btn-primary w-full"
                 >
-                  Me contacter
+                  Écris-moi
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
               </m.div>

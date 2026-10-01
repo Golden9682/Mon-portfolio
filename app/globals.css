@@ -1,34 +1,92 @@
+/* ==========================================================================
+   DÉCISIONS DE DIRECTION — voir docs/specs/refonte-motion-craft.md
+
+   Voix        « l'ingénieur qui montre ses mains » — direct, précis, concret.
+               On ne promet pas, on montre. Mot proscrit : « solution ».
+   Émotion     Solide. Ce qui est montré tient en production, sur un réseau qui tombe.
+   Scroll      1. l'affirmation  2. les contraintes  3. la preuve  4. la personne
+
+   Typo        Anton (display, condensée, hero à 12vw sur un titre de 5 mots)
+               · Archivo (texte) · Zodiak italique (accent : 2 à 4 mots sur
+               tout le site, jamais plus) · JetBrains Mono (chiffres, labels :
+               une voix utilitaire, pas un ornement).
+
+   Couleur     Un seul accent : orange brique #E2572B.
+               Attention : sur le thème « papier » son contraste tombe à 3,1:1 —
+               réservé aux gros titres et aux éléments non textuels, jamais au
+               corps de texte.
+
+   Thèmes      atelier (sombre) → papier (clair) → nuit (plus sombre).
+               La bascule sombre → clair → sombre porte le rythme vertical.
+   ========================================================================== */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ------------------------------------------------------------------ */
-/* Design tokens                                                       */
-/* ------------------------------------------------------------------ */
+/* --------------------------------------------------------------------------
+   Tokens
+   -------------------------------------------------------------------------- */
 :root {
-  --background: #090d16;
-  --background-elevated: #0d1322;
-  --foreground: #f1f5f9;
-  --muted: #94a3b8;
+  /* Thème par défaut : atelier */
+  --bg: #0b0b0c;
+  --bg-raise: #141416;
+  --fg: #f2efe9;
+  --fg-muted: #9b958c;
+  --fg-faint: #827c74; /* 4,8:1 sur --bg : le minimum AA du texte courant */
+  --line: rgba(242, 239, 233, 0.12);
+  --line-strong: rgba(242, 239, 233, 0.22);
+  --surface: rgba(242, 239, 233, 0.035);
+  --surface-raise: rgba(242, 239, 233, 0.06);
 
-  --surface: rgba(15, 23, 42, 0.55);
-  --surface-hover: rgba(15, 23, 42, 0.8);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.14);
+  --accent: #e2572b;
+  --accent-soft: rgba(226, 87, 43, 0.14);
+  --accent-line: rgba(226, 87, 43, 0.35);
+  --on-accent: #0b0b0c;
 
-  --brand: #6366f1;
-  --brand-soft: rgba(99, 102, 241, 0.16);
-  --emerald: #10b981;
-  --cyan: #06b6d4;
-  --amber: #f59e0b;
+  /* Échelle d'espacement unique : 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96 */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s6: 1.5rem;
+  --s8: 2rem;
+  --s12: 3rem;
+  --s16: 4rem;
+  --s24: 6rem;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ------------------------------------------------------------------ */
-/* Base                                                                */
-/* ------------------------------------------------------------------ */
+:root[data-theme="papier"] {
+  --bg: #edeae3;
+  --bg-raise: #e3dfd6;
+  --fg: #15110e;
+  --fg-muted: #514a42;
+  --fg-faint: #6b645b; /* 4,9:1 */
+  --line: rgba(21, 17, 14, 0.14);
+  --line-strong: rgba(21, 17, 14, 0.26);
+  --surface: rgba(21, 17, 14, 0.04);
+  --surface-raise: rgba(21, 17, 14, 0.07);
+  --accent-soft: rgba(226, 87, 43, 0.12);
+  --accent-line: rgba(226, 87, 43, 0.45);
+  --on-accent: #fdfcfa;
+}
+
+:root[data-theme="nuit"] {
+  --bg: #060607;
+  --bg-raise: #101012;
+  --fg: #f2efe9;
+  --fg-muted: #948e85;
+  --fg-faint: #827c74; /* 4,9:1 */
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
 * {
   box-sizing: border-box;
 }
@@ -40,253 +98,258 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-text), ui-sans-serif, system-ui, sans-serif;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
-  background-image:
-    radial-gradient(ellipse 60% 40% at 15% 10%, rgba(99, 102, 241, 0.09) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 85% 30%, rgba(16, 185, 129, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 90%, rgba(6, 182, 212, 0.06) 0%, transparent 60%);
+  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ::selection {
-  background: rgba(99, 102, 241, 0.35);
-  color: #e0e7ff;
+  background: var(--accent);
+  color: var(--on-accent);
 }
 
-/* Focus ring — visible only for keyboard navigation */
 :focus-visible {
-  outline: 2px solid var(--brand);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 2px;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: var(--line-strong);
+  border: 3px solid var(--bg);
   border-radius: 999px;
-  border: 2px solid #090d16;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: var(--accent);
 }
 
-/* ------------------------------------------------------------------ */
-/* Surfaces                                                            */
-/* ------------------------------------------------------------------ */
+/* --------------------------------------------------------------------------
+   Grain — fixe, au-dessus de tout, non interactif
+   -------------------------------------------------------------------------- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Filet de sécurité : le contenu reste lisible sans JS, ou si le JS est lent.
+   Les révélations au scroll (Reveal, StaggerItem) sont servies en `opacity:0`.
+   Sans `data-js` sur <html> — JS désactivé, ou non hydraté après 1,5 s (script
+   inline de app/layout.tsx) — on les affiche dans leur état final.
+   Opt-in via [data-reveal] : les éléments volontairement cachés (aperçu au
+   survol, calques de diaporama) ne doivent surtout pas être forcés visibles.
+   -------------------------------------------------------------------------- */
+html:not([data-js]) [data-reveal] {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Entrée du hero — CSS pur, indépendante du JS.
+   Elle démarre au premier rendu ; une entrée pilotée par JS laissait le titre
+   invisible ~23 s en 3G sur Android d'entrée de gamme (mesuré).
+   -------------------------------------------------------------------------- */
+/* Départ à 0,35 et non 0 : Chrome ne compte pas un texte invisible pour le
+   LCP. Parti de 0, le paragraphe du hero n'était compté qu'à la fin de son
+   fondu (4,6 s en 4G lente, CPU ÷ 4). À 0,35, il est lisible et compté dès
+   le premier affichage ; la montée reste perceptible. */
+@keyframes hero-rise {
+  from {
+    opacity: 0.35;
+    transform: translateY(24px);
+  }
+}
+.hero-rise {
+  animation: hero-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--d, 0s);
+}
+
+/* --------------------------------------------------------------------------
+   Composants
+   -------------------------------------------------------------------------- */
 @layer components {
-  /* Solid, blur-free card. Cheap to paint on low-end mobiles. */
+  /* Cadre unique de la page : navbar, hero et sections partagent les mêmes
+     bords, sinon les alignements à gauche ne tombent pas sur la même ligne. */
+  .frame {
+    width: 100%;
+    max-width: 1600px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .frame {
+      padding-inline: 2.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .frame {
+      padding-inline: 4rem;
+    }
+  }
+
   .card {
     position: relative;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0) 60%),
-      var(--surface);
-    border: 1px solid var(--border);
-    transition:
-      transform 0.4s var(--ease-out-expo),
-      border-color 0.3s ease,
-      box-shadow 0.4s var(--ease-out-expo),
-      background-color 0.3s ease;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
   }
 
   .card-hover:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-strong);
-    box-shadow:
-      0 20px 40px -20px rgba(0, 0, 0, 0.6),
-      0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    border-color: var(--line-strong);
+    background: var(--surface-raise);
   }
 
-  /* Blur is reserved for overlays (navbar, modal) where it matters. */
-  .glass-panel {
-    background: rgba(13, 19, 34, 0.75);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid var(--border);
-  }
-
-  /* Spotlight: radial glow following the cursor (see SpotlightCard) */
-  .spotlight::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    background: radial-gradient(
-      420px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      var(--spot-color, rgba(99, 102, 241, 0.16)),
-      transparent 45%
-    );
-  }
-  .spotlight:hover::before {
-    opacity: 1;
-  }
-
-  /* Gradient border on hover, using a masked pseudo-element */
-  .spotlight::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    background: radial-gradient(
-      300px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      var(--spot-border, rgba(99, 102, 241, 0.7)),
-      transparent 60%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-  .spotlight:hover::after {
-    opacity: 1;
-  }
-
-  /* Eyebrow label above section titles */
+  /* Étiquette au-dessus des titres de section */
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.3rem 0.8rem;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    gap: var(--s2);
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    border: 1px solid;
+    color: var(--accent);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
   }
 
-  /* Primary / secondary buttons */
+  /* Boutons — un seul principal par écran */
   .btn {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: var(--s2);
+    min-height: 48px;
+    padding: 0 var(--s6);
+    font-family: var(--font-mono), monospace;
+    font-size: 12px;
     font-weight: 600;
-    border-radius: 0.875rem;
-    overflow: hidden;
-    transition:
-      transform 0.3s var(--ease-out-expo),
-      box-shadow 0.3s var(--ease-out-expo),
-      background-color 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .btn:active {
-    transform: translateY(0) scale(0.98);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+    transition: background-color 0.25s var(--ease-out-expo),
+      color 0.25s var(--ease-out-expo), border-color 0.25s var(--ease-out-expo);
   }
 
   .btn-primary {
-    color: #fff;
-    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
-    box-shadow:
-      0 10px 30px -10px rgba(99, 102, 241, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    background: var(--accent);
+    color: var(--on-accent);
   }
   .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 16px 36px -12px rgba(99, 102, 241, 0.75),
-      inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  }
-  /* Shine sweep */
-  .btn-primary::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      110deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.22) 50%,
-      transparent 80%
-    );
-    transform: translateX(-120%);
-    transition: transform 0.7s var(--ease-out-expo);
-  }
-  .btn-primary:hover::after {
-    transform: translateX(120%);
+    background: var(--fg);
+    color: var(--bg);
   }
 
   .btn-secondary {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--line-strong);
   }
   .btn-secondary:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent);
+    color: var(--accent);
   }
 
-  /* Text field */
+  /* Champs */
   .field {
     width: 100%;
-    padding: 0.75rem 1rem 0.75rem 2.75rem;
-    border-radius: 0.875rem;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 0.9rem;
-    transition:
-      border-color 0.2s ease,
-      background-color 0.2s ease,
-      box-shadow 0.2s ease;
+    padding: var(--s3) var(--s4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--fg);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
   .field::placeholder {
-    color: #64748b;
-  }
-  .field:hover {
-    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--fg-faint);
   }
   .field:focus {
     outline: none;
-    border-color: rgba(99, 102, 241, 0.7);
-    background: rgba(99, 102, 241, 0.05);
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+    border-color: var(--accent);
+    background: var(--surface-raise);
   }
 
-  /* Gradient text */
-  .text-gradient {
-    background: linear-gradient(90deg, #818cf8 0%, #22d3ee 50%, #34d399 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  /* Section separators */
-  .divider-glow {
+  .divider-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+    background: var(--line);
   }
 }
 
-/* ------------------------------------------------------------------ */
-/* Utilities                                                           */
-/* ------------------------------------------------------------------ */
+/* --------------------------------------------------------------------------
+   Utilitaires
+   -------------------------------------------------------------------------- */
 @layer utilities {
-  .bg-grid-pattern {
-    background-size: 44px 44px;
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
-    mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
+  /* Échelle typographique — contraste brutal, aucune taille intermédiaire */
+  /* Hero : 12vw au minimum (§3.3), possible parce que le titre tient en 5 mots. */
+  .text-display {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(3rem, 12vw, 16rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  /* Mobile (§5) : 16vw, « Le réseau tombe. » passe sur deux lignes — trois
+     lignes de 62 px pèsent plus que deux de 48 px. */
+  @media (max-width: 639px) {
+    .text-display {
+      font-size: 16vw;
+    }
+  }
+
+  /* Voix d'accent : un seul mot, en italique Zodiak, minuscule.
+     Anton a une hauteur de capitale très haute : l'italique est agrandi pour
+     que son œil (x-height) tienne face aux capitales. */
+  .text-accent-word {
+    font-family: var(--font-accent), Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    font-size: 1.12em;
+    line-height: 0;
+  }
+
+  /* Interligne à 1,1 et non 0,95 : en capitales françaises, la cédille d'une
+     ligne touchait l'accent de la suivante (« COMPÉTENCES & / ÉCOSYSTÈME »).
+     Anton a des capitales très hautes ; à 1, le contact restait visible. */
+  .text-title {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(2.25rem, 7vw, 5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .text-label {
+    font-family: var(--font-mono), monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 
   .text-balance {
@@ -296,36 +359,28 @@ body {
     text-wrap: pretty;
   }
 
-  /* Fluid type scale for display headings */
-  .text-display {
-    font-size: clamp(2.25rem, 1.2rem + 4.5vw, 4.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.035em;
-  }
-  .text-title {
-    font-size: clamp(1.75rem, 1.1rem + 2.2vw, 2.75rem);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-  }
-
-  .animate-shimmer {
-    background-size: 200% auto;
-    animation: shimmer 6s linear infinite;
+  /* Matière : radiales décentrées, jamais un linear-gradient seul */
+  .mesh-atelier {
+    background-image: radial-gradient(
+        58% 48% at 18% 12%,
+        rgba(226, 87, 43, 0.1) 0%,
+        transparent 62%
+      ),
+      radial-gradient(52% 44% at 82% 28%, rgba(226, 87, 43, 0.055) 0%, transparent 60%),
+      radial-gradient(66% 56% at 46% 92%, rgba(226, 87, 43, 0.045) 0%, transparent 68%);
   }
 }
 
-@keyframes shimmer {
-  to {
-    background-position: 200% center;
-  }
-}
-
-/* ------------------------------------------------------------------ */
-/* Reduced motion                                                      */
-/* ------------------------------------------------------------------ */
+/* --------------------------------------------------------------------------
+   Mouvement réduit
+   -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  /* Le délai laisserait le hero vide un instant : état final immédiat. */
+  .hero-rise {
+    animation: none;
   }
   *,
   *::before,

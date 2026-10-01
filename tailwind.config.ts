@@ -1,69 +1,57 @@
 import type { Config } from "tailwindcss";
 
+/* Palette et typo entièrement redéfinies — aucune couleur Tailwind par défaut.
+   Voir docs/specs/refonte-motion-craft.md §2.2 */
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
   theme: {
+    /* `colors` remplace la palette par défaut au lieu de l'étendre :
+       `text-slate-400` et consorts cessent d'exister. */
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      bg: "var(--bg)",
+      raise: "var(--bg-raise)",
+      ink: "var(--fg)",
+      muted: "var(--fg-muted)",
+      faint: "var(--fg-faint)",
+      line: "var(--line)",
+      "line-strong": "var(--line-strong)",
+      surface: "var(--surface)",
+      "surface-raise": "var(--surface-raise)",
+      accent: "var(--accent)",
+      "accent-soft": "var(--accent-soft)",
+      "accent-line": "var(--accent-line)",
+      "on-accent": "var(--on-accent)",
+    },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+        display: ["var(--font-display)", "sans-serif"],
+        sans: ["var(--font-text)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+        accent: ["var(--font-accent)", "Georgia", "serif"],
       },
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        brand: {
-          50: "#eef2ff",
-          100: "#e0e7ff",
-          200: "#c7d2fe",
-          300: "#a5b4fc",
-          400: "#818cf8",
-          500: "#6366f1",
-          600: "#4f46e5",
-          700: "#4338ca",
-          800: "#3730a3",
-          900: "#312e81",
-        },
-        accent: {
-          emerald: "#10b981",
-          cyan: "#06b6d4",
-          amber: "#f59e0b",
-          violet: "#8b5cf6",
-        }
+      spacing: {
+        /* Échelle unique 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96 */
+        section: "6rem",
+        "section-lg": "9rem",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      borderRadius: {
+        /* Coins quasi nets : l'arrondi généralisé est un marqueur de template */
+        DEFAULT: "2px",
+        sm: "2px",
+        md: "3px",
+        lg: "4px",
+        xl: "4px",
+        "2xl": "6px",
+        full: "9999px",
       },
       transitionTimingFunction: {
         "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
-        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-      },
-      animation: {
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        float: "float 6s ease-in-out infinite",
-        "float-delayed": "float 7s ease-in-out 1.5s infinite",
-        orbit: "orbit 18s linear infinite",
-        "spin-slow": "spin 8s linear infinite",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        orbit: {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
-        },
-      },
-      boxShadow: {
-        glow: "0 0 40px -10px rgba(99, 102, 241, 0.5)",
-        "glow-emerald": "0 0 40px -10px rgba(16, 185, 129, 0.5)",
-        "glow-cyan": "0 0 40px -10px rgba(6, 182, 212, 0.5)",
       },
     },
   },
