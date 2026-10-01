@@ -94,7 +94,7 @@ function ModalContent({
 }: {
   project: Project;
   onClose: () => void;
-  closeRef: React.RefObject<HTMLButtonElement>;
+  closeRef: React.RefObject<HTMLButtonElement | null>;
 }) {
   const { Icon, color } = iconMap[project.iconName] ?? { Icon: Cpu, color: "text-accent" };
   const shots = project.screenshots ?? (project.previewImage ? [project.previewImage] : []);
