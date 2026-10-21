@@ -6,6 +6,7 @@ import { projectsData, Project } from "@/data/projects";
 import { ProjectModal } from "./ProjectModal";
 import { LayoutGroup } from "framer-motion";
 import { m, Reveal } from "@/components/ui/motion";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SplitReveal } from "@/components/ui/SplitReveal";
 import { cn } from "@/lib/utils";
@@ -113,10 +114,15 @@ function ProjectBlock({
   const num = String(index + 1).padStart(2, "0");
 
   return (
-    <article className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10 items-center py-16 lg:py-24 border-t border-line first:border-t-0 first:pt-4">
-      <Reveal
+    <MagneticAssembly
+      className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10 items-center py-16 lg:py-24 border-t border-line first:border-t-0 first:pt-4"
+      stagger={0.12}
+      amount={0.15}
+    >
+      <AssemblyFragment
+        direction={flip ? "right" : "left"}
+        index={index}
         className={cn("lg:col-span-7", flip && "lg:col-start-6 lg:row-start-1")}
-        direction="none"
       >
         <button
           type="button"
@@ -126,9 +132,13 @@ function ProjectBlock({
         >
           <ProjectVisual project={project} />
         </button>
-      </Reveal>
+      </AssemblyFragment>
 
-      <Reveal className={cn("lg:col-span-5", flip && "lg:col-start-1 lg:row-start-1")} delay={0.08}>
+      <AssemblyFragment
+        direction={flip ? "left" : "right"}
+        index={index + 1}
+        className={cn("lg:col-span-5", flip && "lg:col-start-1 lg:row-start-1")}
+      >
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-label mb-6">
           <span className="text-accent">
             {num} / {String(total).padStart(2, "0")}
@@ -176,8 +186,8 @@ function ProjectBlock({
             </a>
           )}
         </div>
-      </Reveal>
-    </article>
+      </AssemblyFragment>
+    </MagneticAssembly>
   );
 }
 

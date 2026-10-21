@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal } from "@/components/ui/motion";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 /*
  * Ce que je fais. Pas une grille de cartes égales (MOTION-CRAFT §8) : quatre
@@ -52,12 +52,13 @@ export function Services() {
           className="mb-16 md:mb-20"
         />
 
-        <ol className="border-t border-line">
+        <MagneticAssembly as="ol" className="border-t border-line" stagger={0.09}>
           {services.map((service, i) => (
-            <Reveal
+            <AssemblyFragment
               key={service.id}
               as="li"
-              delay={i * 0.06}
+              index={i}
+              direction={i % 2 === 0 ? "left" : "right"}
               className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-4 py-10 lg:py-12 border-b border-line"
             >
               <span className="lg:col-span-1 text-label text-accent pt-2">{String(i + 1).padStart(2, "0")}</span>
@@ -70,9 +71,9 @@ export function Services() {
                   <li key={d}>{d}</li>
                 ))}
               </ul>
-            </Reveal>
+            </AssemblyFragment>
           ))}
-        </ol>
+        </MagneticAssembly>
       </div>
     </section>
   );

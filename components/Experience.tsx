@@ -3,7 +3,7 @@
 import React from "react";
 import { experiencesData } from "@/data/experiences";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal } from "@/components/ui/motion";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 /*
  * Parcours. Une ligne par étape, la période en marge gauche comme dans un CV
@@ -21,13 +21,13 @@ export function Experience() {
           className="mb-16 md:mb-20"
         />
 
-        <ol className="border-t border-line">
+        <MagneticAssembly as="ol" className="border-t border-line" stagger={0.08}>
           {experiencesData.map((item, idx) => (
-            <Reveal
+            <AssemblyFragment
               key={item.id}
               as="li"
-              delay={idx * 0.04}
-              amount={0.15}
+              index={idx}
+              direction={idx % 2 === 0 ? "left" : "right"}
               className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-4 py-10 lg:py-14 border-b border-line"
             >
               <div className="lg:col-span-3 flex lg:flex-col gap-x-4 gap-y-2 text-label">
@@ -53,9 +53,9 @@ export function Experience() {
 
                 <p className="mt-6 font-mono text-xs text-faint leading-relaxed">{item.badges.join(" · ")}</p>
               </div>
-            </Reveal>
+            </AssemblyFragment>
           ))}
-        </ol>
+        </MagneticAssembly>
       </div>
     </section>
   );

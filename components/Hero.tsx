@@ -4,6 +4,7 @@ import { ParallaxScope } from "@/components/ui/ParallaxScope";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { HeroTiltPhones } from "@/components/ui/HeroTiltPhones";
 import { HeroSpotlight } from "@/components/ui/HeroSpotlight";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 const delay = (i: number) => ({ "--d": `${0.1 + i * 0.08}s` }) as React.CSSProperties;
 
@@ -104,13 +105,17 @@ export function Hero() {
           </div>
 
           {/* Contraintes de terrain & Savoir-faire avec micro-interactions */}
-          <ul
-            style={delay(4)}
-            className="hero-rise relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-20 md:mt-28 border-t border-line bg-bg/0"
+          <MagneticAssembly
+            as="ul"
+            stagger={0.07}
+            className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-20 md:mt-28 border-t border-line bg-bg/0"
           >
-            {contraintes.map(({ icon: Icon, label, text }) => (
-              <li
+            {contraintes.map(({ icon: Icon, label, text }, idx) => (
+              <AssemblyFragment
                 key={label}
+                as="li"
+                index={idx}
+                direction="auto"
                 className="group py-6 lg:py-7 lg:px-7 lg:first:pl-0 border-b sm:border-b-0 border-line lg:border-l lg:first:border-l-0 transition-colors duration-300 hover:bg-surface/50"
               >
                 <div className="flex items-center gap-2 text-label text-accent mb-3 transition-transform duration-300 group-hover:translate-x-1">
@@ -120,9 +125,9 @@ export function Hero() {
                 <p className="text-sm text-muted leading-relaxed max-w-[28ch] group-hover:text-ink transition-colors duration-300">
                   {text}
                 </p>
-              </li>
+              </AssemblyFragment>
             ))}
-          </ul>
+          </MagneticAssembly>
 
         </div>
       </ParallaxScope>

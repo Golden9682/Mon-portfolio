@@ -2,7 +2,7 @@
 
 import React from "react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal } from "@/components/ui/motion";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 /*
  * À propos (temps 4 du scroll : la personne). Un texte qui respire à gauche,
@@ -41,8 +41,8 @@ export function About() {
           className="mb-16 md:mb-20"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-16">
-          <Reveal className="lg:col-span-7">
+        <MagneticAssembly className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-16" stagger={0.1}>
+          <AssemblyFragment direction="left" index={0} className="lg:col-span-7">
             <h3 className="text-2xl sm:text-3xl font-semibold text-ink leading-tight text-balance">
               Des produits ancrés dans le réel.
             </h3>
@@ -72,9 +72,9 @@ export function About() {
                 </div>
               ))}
             </dl>
-          </Reveal>
+          </AssemblyFragment>
 
-          <Reveal className="lg:col-start-9 lg:col-span-4 space-y-12" delay={0.1}>
+          <AssemblyFragment direction="right" index={1} className="lg:col-start-9 lg:col-span-4 space-y-12">
             <div>
               <h4 className="text-label text-faint mb-4">Langues</h4>
               <dl className="border-t border-line">
@@ -95,8 +95,8 @@ export function About() {
                 ))}
               </ul>
             </div>
-          </Reveal>
-        </div>
+          </AssemblyFragment>
+        </MagneticAssembly>
       </div>
     </section>
   );

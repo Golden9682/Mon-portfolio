@@ -3,7 +3,7 @@
 import React from "react";
 import { skillCategories } from "@/data/skills";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Reveal } from "@/components/ui/motion";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 /*
  * Compétences. Une grille simple, tout est lisible sans cliquer.
@@ -23,9 +23,9 @@ export function Skills() {
           className="mb-16 md:mb-20"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10">
+        <MagneticAssembly className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10" stagger={0.07}>
           {skillCategories.map((category, i) => (
-            <Reveal key={category.id} delay={(i % 3) * 0.06} className="border-t border-line pt-6 pb-12">
+            <AssemblyFragment key={category.id} index={i} direction="auto" className="border-t border-line pt-6 pb-12">
               <div className="flex items-center gap-4 text-label mb-5">
                 <span className="text-accent">{String(i + 1).padStart(2, "0")}</span>
                 <span className="text-muted">{category.badge}</span>
@@ -41,9 +41,9 @@ export function Skills() {
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </AssemblyFragment>
           ))}
-        </div>
+        </MagneticAssembly>
       </div>
     </section>
   );

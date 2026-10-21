@@ -63,7 +63,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen antialiased bg-bg text-ink">
+      <body className="min-h-screen antialiased bg-bg text-ink overflow-x-hidden">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { m, Reveal } from "@/components/ui/motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 /*
  * Contact (sortie du scroll). Les moyens directs à gauche en lignes de
@@ -54,9 +55,9 @@ export function Contact() {
           className="mb-16 md:mb-20"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-16 items-start">
+        <MagneticAssembly className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-16 items-start" stagger={0.12}>
           {/* Moyens directs */}
-          <Reveal className="lg:col-span-4">
+          <AssemblyFragment direction="left" index={0} className="lg:col-span-4">
             <dl className="border-t border-line">
               <div className="py-5 border-b border-line">
                 <dt className="text-label text-faint mb-2">E-mail</dt>
@@ -98,10 +99,10 @@ export function Contact() {
                 </dd>
               </div>
             </dl>
-          </Reveal>
+          </AssemblyFragment>
 
           {/* Formulaire */}
-          <Reveal className="lg:col-start-6 lg:col-span-7" delay={0.1}>
+          <AssemblyFragment direction="right" index={1} className="lg:col-start-6 lg:col-span-7">
             <AnimatePresence mode="wait" initial={false}>
               {formSubmitted ? (
                 <m.div
@@ -192,8 +193,8 @@ export function Contact() {
                 </m.form>
               )}
             </AnimatePresence>
-          </Reveal>
-        </div>
+          </AssemblyFragment>
+        </MagneticAssembly>
       </div>
     </section>
   );
