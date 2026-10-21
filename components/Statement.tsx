@@ -1,4 +1,5 @@
 import React from "react";
+import { SplitReveal } from "@/components/ui/SplitReveal";
 
 /*
  * Respiration (MOTION-CRAFT §4, rythme vertical). Après la section la plus
@@ -9,11 +10,14 @@ export function Statement() {
   return (
     <section aria-label="Manière de travailler" data-theme-section="papier" className="relative py-40 md:py-64">
       <div className="frame">
-        <p className="lg:ml-[16.666%] font-display uppercase text-ink leading-[0.95] tracking-[-0.03em] text-[clamp(3rem,9vw,9rem)]">
+        <SplitReveal
+          as="p"
+          className="lg:ml-[16.666%] font-display uppercase text-ink leading-[0.95] tracking-[-0.03em] text-[clamp(3rem,9vw,9rem)]"
+        >
           Le code,
           <br />
           ça se <em className="text-accent-word text-accent">montre.</em>
-        </p>
+        </SplitReveal>
       </div>
     </section>
   );

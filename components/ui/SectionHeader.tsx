@@ -3,6 +3,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "./motion";
+import { SplitReveal } from "./SplitReveal";
 
 /*
  * En-tête de section. Toujours aligné à gauche : aucun axe centré sur la page
@@ -30,9 +31,9 @@ export function SectionHeader({ eyebrow, title, description, indent = 0, classNa
       <Reveal>
         <span className="eyebrow mb-5">{eyebrow}</span>
       </Reveal>
-      <Reveal delay={0.08}>
-        <h2 className="text-title text-ink text-balance">{title}</h2>
-      </Reveal>
+      <SplitReveal as="h2" className="text-title text-ink text-balance">
+        {title}
+      </SplitReveal>
       {description && (
         <Reveal delay={0.16}>
           <p className="text-muted text-base sm:text-lg leading-relaxed mt-5 max-w-2xl text-pretty">{description}</p>

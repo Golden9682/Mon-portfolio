@@ -217,6 +217,19 @@ html:not([data-js]) [data-reveal] {
 }
 
 /* --------------------------------------------------------------------------
+   Masques de SplitReveal : le masque coupe tout ce qui dépasse de la ligne,
+   donc les accents des capitales d'Anton, la cédille (~0,28em sous la ligne
+   de base) et l'italique d'accent, plus grand que la ligne.
+   On élargit la zone visible avec un clip-path aux marges négatives au lieu
+   de l'overflow posé par SplitText : la mise en page ne bouge pas (des marges
+   négatives fusionnaient entre lignes et écartaient les lignes de ~0,18em).
+   -------------------------------------------------------------------------- */
+.split-line-mask {
+  overflow: visible !important;
+  clip-path: inset(-0.18em -0.12em -0.34em);
+}
+
+/* --------------------------------------------------------------------------
    Composants
    -------------------------------------------------------------------------- */
 @layer components {

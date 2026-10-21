@@ -7,6 +7,7 @@ import { ProjectModal } from "./ProjectModal";
 import { LayoutGroup } from "framer-motion";
 import { m, Reveal } from "@/components/ui/motion";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SplitReveal } from "@/components/ui/SplitReveal";
 import { cn } from "@/lib/utils";
 
 /*
@@ -136,9 +137,12 @@ function ProjectBlock({
           <span className="text-faint">{project.period}</span>
         </div>
 
-        <h3 className="font-display uppercase text-ink leading-[0.95] tracking-[-0.02em] text-[clamp(2.25rem,4.2vw,4rem)] text-balance">
+        <SplitReveal
+          as="h3"
+          className="font-display uppercase text-ink leading-[0.95] tracking-[-0.02em] text-[clamp(2.25rem,4.2vw,4rem)] text-balance"
+        >
           {project.title}
-        </h3>
+        </SplitReveal>
         <p className="text-ink/80 font-medium mt-3">{project.subtitle}</p>
         <p className="text-muted leading-relaxed mt-5 text-pretty">{project.description}</p>
 

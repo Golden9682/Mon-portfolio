@@ -125,7 +125,12 @@ correction, nouvelle capture. Une section à la fois (§6).
 - [x] **3.7** Retrait des anti-patterns : glassmorphism (navbar comprise), halo au curseur,
       titre en dégradé, grille de fond, orbes (hero, Contact, Footer), pilules, ✨ Sparkles,
       flèches animées, cartes égales, confettis
-- [ ] **4.1** Révélations de texte masquées (SplitText), ease `power4.out`
+- [x] **4.1** Révélations de texte masquées (`components/ui/SplitReveal.tsx`, GSAP SplitText) :
+      titres de section, titres de projets, phrase de respiration. Lignes montant de 160 %
+      sous un masque, 1,1 s, `power4.out`, décalage 0,08 s. Le masque est élargi par
+      `clip-path` (pas de marges, qui fusionnaient entre lignes) pour ne rogner ni accents,
+      ni cédilles, ni l'italique. Rien n'est découpé sans JS, en mouvement réduit, si le
+      filet de sécurité a retiré `data-js`, ou si le titre est déjà à l'écran.
 - [ ] **4.2** Parallaxe à 3 plans de profondeur sur Hero et Projets
 - [ ] **4.3** Micro-copies et états (vide, erreur, succès, 404)
 
