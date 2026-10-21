@@ -64,9 +64,9 @@ export function Hero() {
             </h1>
           </div>
 
-          {/* Rupture d'axe & Présentation */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 mt-10 md:mt-14">
-            <div style={delay(2)} className="hero-rise relative z-10 lg:col-start-3 lg:col-span-6">
+          {/* Rupture d'axe & Présentation + Vitrine 3D smartphones */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-10 gap-y-12 mt-10 md:mt-14 items-center">
+            <div style={delay(2)} className="hero-rise relative z-10 lg:col-span-6 xl:col-span-6">
               <p className="text-lg sm:text-xl leading-relaxed text-muted text-pretty max-w-2xl">
                 Moi c&apos;est <strong className="text-ink font-semibold">Kokou Komna Abdoul Raouf</strong>.
                 Développeur Full-Stack &amp; Spécialiste de l&apos;Automatisation.
@@ -97,11 +97,11 @@ export function Hero() {
                 </MagneticButton>
               </div>
             </div>
-          </div>
 
-          {/* Vitrine interactive 3D Tilt des smartphones NUNYA */}
-          <div style={delay(3)} className="hero-rise">
-            <HeroTiltPhones />
+            {/* Vitrine interactive 3D Tilt des smartphones NUNYA */}
+            <div style={delay(3)} className="hero-rise lg:col-span-6 xl:col-span-6 relative w-full flex justify-center lg:justify-end">
+              <HeroTiltPhones />
+            </div>
           </div>
 
           {/* Contraintes de terrain & Savoir-faire avec micro-interactions */}

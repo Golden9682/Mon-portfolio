@@ -87,16 +87,16 @@ export function HeroTiltPhones() {
   return (
     <figure
       ref={containerRef}
-      className="relative mt-16 h-[118vw] sm:h-[96vw] lg:mt-0 lg:h-auto lg:absolute lg:inset-y-0 lg:right-[calc((100%-100vw)/2)] lg:w-[42vw] pointer-events-none perspective-[1200px]"
+      className="relative w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] h-[380px] sm:h-[450px] lg:h-[480px] pointer-events-none perspective-[1200px]"
       aria-label="Aperçu des écrans NUNYA en 3D"
     >
-      {/* Plan Arrière : Écran de Quiz (Profondeur z = -40px) */}
+      {/* Plan Arrière : Écran de Quiz (Profondeur z = -35px) */}
       <div
-        className="absolute w-[44vw] left-[6vw] top-[4vw] sm:w-[32vw] sm:left-[14vw] lg:left-auto lg:w-[16vw] lg:right-[19vw] lg:top-[28vw] xl:top-[25vw] 2xl:w-[14vw] 2xl:right-[17vw] 2xl:top-[29vw] will-change-transform"
+        className="absolute w-[180px] sm:w-[220px] lg:w-[240px] left-[4%] top-[12%] sm:left-[8%] lg:left-[6%] will-change-transform z-10"
         style={{
           transform: !reducedMotion && isClient
-            ? `translate3d(${tilt.tx * 0.5}px, ${tilt.ty * 0.5}px, -40px) rotateX(${tilt.rx * 0.7}deg) rotateY(${tilt.ry * 0.7 - 6}deg)`
-            : "rotate(-6deg)",
+            ? `translate3d(${tilt.tx * 0.5}px, ${tilt.ty * 0.5}px, -35px) rotateX(${tilt.rx * 0.7}deg) rotateY(${tilt.ry * 0.7 - 7}deg)`
+            : "rotate(-7deg)",
           transition: reducedMotion ? "none" : undefined,
         }}
       >
@@ -107,20 +107,20 @@ export function HeroTiltPhones() {
           height={1022}
           className="opacity-70"
         />
-        <div className="mt-6 flex items-center gap-2">
+        <div className="mt-3 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-          <p className="text-label text-muted font-mono uppercase tracking-wider text-xs">
+          <p className="text-label text-muted font-mono uppercase tracking-wider text-[10px] sm:text-xs">
             NUNYA · 100% hors ligne
           </p>
         </div>
       </div>
 
-      {/* Plan Avant : Écran Classement & Mobile Money (Profondeur z = +20px, plus réactif) */}
+      {/* Plan Avant : Écran Classement & Mobile Money (Profondeur z = +25px, plus réactif) */}
       <div
-        className="absolute w-[56vw] -right-[10vw] top-0 sm:w-[42vw] sm:-right-[4vw] lg:w-[22vw] lg:-right-[4vw] lg:top-[18vw] xl:top-[15vw] 2xl:w-[19vw] 2xl:top-[16vw] will-change-transform"
+        className="absolute w-[200px] sm:w-[245px] lg:w-[270px] right-[4%] top-[2%] sm:right-[8%] lg:right-[6%] will-change-transform z-20"
         style={{
           transform: !reducedMotion && isClient
-            ? `translate3d(${tilt.tx * 1.2}px, ${tilt.ty * 1.2}px, 20px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry + 5}deg)`
+            ? `translate3d(${tilt.tx * 1.2}px, ${tilt.ty * 1.2}px, 25px) rotateX(${tilt.rx}deg) rotateY(${tilt.ry + 5}deg)`
             : "rotate(5deg)",
           transition: reducedMotion ? "none" : undefined,
         }}
@@ -136,10 +136,10 @@ export function HeroTiltPhones() {
 
           {/* Badge flottant 3D d'impact */}
           <div
-            className="absolute -bottom-4 -left-6 z-20 hidden sm:flex items-center gap-2.5 px-4 py-2 rounded-xl bg-[#141416]/95 border border-line-strong shadow-2xl backdrop-blur-md text-ink text-xs font-mono"
+            className="absolute -bottom-3 -left-3 sm:-left-5 z-30 flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#141416]/95 border border-line-strong shadow-2xl backdrop-blur-md text-ink text-[10px] sm:text-xs font-mono"
             style={{
               transform: !reducedMotion && isClient
-                ? `translate3d(${tilt.tx * 0.4}px, ${tilt.ty * 0.4}px, 40px)`
+                ? `translate3d(${tilt.tx * 0.4}px, ${tilt.ty * 0.4}px, 45px)`
                 : undefined,
             }}
           >
