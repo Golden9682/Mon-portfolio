@@ -3,7 +3,6 @@ import { MapPin, Cpu, CreditCard, CheckCircle2, Smartphone, ArrowUpRight, Sparkl
 import { ParallaxScope } from "@/components/ui/ParallaxScope";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { HeroTiltPhones } from "@/components/ui/HeroTiltPhones";
-import { HeroSpotlight } from "@/components/ui/HeroSpotlight";
 import { MagneticAssembly, AssemblyFragment } from "@/components/ui/MagneticAssembly";
 
 const delay = (i: number) => ({ "--d": `${0.1 + i * 0.08}s` }) as React.CSSProperties;
@@ -18,9 +17,6 @@ const contraintes = [
 export function Hero() {
   return (
     <section id="hero" data-theme-section="atelier" className="relative overflow-hidden mesh-atelier">
-      {/* Spot d'éclairage réactif au curseur */}
-      <HeroSpotlight />
-
       <ParallaxScope className="relative z-10">
         <div className="relative frame pt-36 pb-20 md:pt-44 md:pb-28">
           

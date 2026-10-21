@@ -10,10 +10,12 @@ import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { ScrollEngine } from "@/components/ui/ScrollEngine";
+import { AmbientCursorBacklight } from "@/components/ui/AmbientCursorBacklight";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen flex flex-col">
+      <AmbientCursorBacklight />
       <ScrollEngine />
       <Navbar />
       <Hero />
