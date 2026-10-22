@@ -89,12 +89,12 @@ export const projectsData: Project[] = [
     featured: true,
     period: "2024 – En Ligne",
     logoUrl: "/images/projects/rapido-logo.png",
-    previewImage: "/images/projects/xrapido-wide.jpg",
+    previewImage: "/images/projects/rapido-mobile-client.png",
     screenshots: [
-      "/images/projects/xrapido-wide.jpg",
-      "/images/projects/rapido-mobile-real.png"
+      "/images/projects/rapido-mobile-client.png",
+      "/images/projects/rapido-mobile-driver.png"
     ],
-    previewLayout: "desktop",
+    previewLayout: "mobile",
     description: "Conception, développement et mise en ligne de la plateforme officielle et de l'écosystème de transport & livraison pour XRAPIDO S.A.R.L.U. au Togo (mise en relation client-chauffeur, estimation P2P et paiements locaux).",
     longDescription: "XRapido est un écosystème complet de mobilité et logistique développée pour le marché togolais. La plateforme comprend le site officiel en production (xrapidoexpress.com), une application mobile client pour commander courses et livraisons (moto, tricycle, voiture) avec négociation tarifaire P2P en temps réel, une application chauffeur avec suivi GPS et encaissement sécurisé, et un back-office d'administration avec contrôle KYC.",
     metrics: [
