@@ -102,7 +102,7 @@ export function HeroTiltPhones() {
       >
         <PhoneFrame
           src="/images/projects/nunya-quiz.png"
-          alt="NUNYA — écran de quiz hors ligne"
+          alt="NUNYA — sélection des épreuves et révision hors ligne"
           width={472}
           height={1022}
           className="opacity-70"
@@ -128,7 +128,7 @@ export function HeroTiltPhones() {
         <div className="relative group">
           <PhoneFrame
             src="/images/projects/nunya-mobile-real.png"
-            alt="NUNYA — classement mensuel et gains Mobile Money"
+            alt="NUNYA — compte à rebours examen BAC 1 et suivi de révision"
             width={472}
             height={1024}
             className="ring-1 ring-white/10"

@@ -44,7 +44,6 @@ export const projectsData: Project[] = [
     screenshots: [
       "/images/projects/nunya-mobile-real.png",
       "/images/projects/nunya-quiz.png",
-      "/images/projects/nunya-premium.png",
     ],
     description: "Application mobile gamifiée pour les élèves togolais préparant le BEPC, BAC 1 et BAC 2 avec annales officielles, classements mensuels et paiements Mobile Money.",
     longDescription: "NUNYA a été conçu pour résoudre le défi d'accès aux ressources éducatives de qualité au Togo. L'application intègre un mode 100% hors-ligne indispensable pour les zones à faible connectivité, un système de récompenses financières mensuelles pour stimuler les meilleurs élèves, et une sécurité renforcée contre la triche.",
